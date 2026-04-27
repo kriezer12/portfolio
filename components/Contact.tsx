@@ -1,7 +1,41 @@
+'use client';
+import { useState } from 'react';
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import styles from './Contact.module.css';
 
 export default function Contact() {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+      honeypot: formData.get('honeypot'),
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        e.currentTarget.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+  };
+
   return (
     <section className={styles.contact} id="contact">
       <div className={styles.header}>
@@ -32,40 +66,31 @@ export default function Contact() {
           </a>
         </div>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          {/* Honeypot field */}
+          <input type="text" name="honeypot" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>Name</label>
-            <input
-              type="text"
-              id="name"
-              className={styles.input}
-              placeholder="Your name"
-            />
+            <input type="text" name="name" id="name" required className={styles.input} placeholder="Your name" />
           </div>
 
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.label}>Email</label>
-            <input
-              type="email"
-              id="email"
-              className={styles.input}
-              placeholder="your@email.com"
-            />
+            <input type="email" name="email" id="email" required className={styles.input} placeholder="your@email.com" />
           </div>
 
           <div className={styles.formGroup}>
             <label htmlFor="message" className={styles.label}>Message</label>
-            <textarea
-              id="message"
-              className={styles.textarea}
-              placeholder="Tell me about your project..."
-              rows={6}
-            />
+            <textarea name="message" id="message" required className={styles.textarea} placeholder="Tell me about your project..." rows={6} />
           </div>
 
-          <button type="submit" className={styles.submit}>
-            Send Message
+          <button type="submit" className={styles.submit} disabled={status === 'loading'}>
+            {status === 'loading' ? 'Sending...' : 'Send Message'}
           </button>
+          
+          {status === 'success' && <p className={styles.success}>Message sent successfully!</p>}
+          {status === 'error' && <p className={styles.error}>Failed to send message. Please try again.</p>}
         </form>
       </div>
     </section>
