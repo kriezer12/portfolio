@@ -12,9 +12,10 @@ export default function Header() {
           </div>
           <nav className={styles.nav}>
             <Link href="/" prefetch={true}>about</Link>
-            <Link href="/tech-stack" prefetch={true}>stack</Link>
+            <Link href="/#expertise" prefetch={true}>stack</Link>
             <Link href="/#experience" prefetch={true}>experience</Link>
             <Link href="/#projects" prefetch={true}>projects</Link>
+            <Link href="/#certifications" prefetch={true}>certifications</Link>
             <Link href="/#contact" prefetch={true}>contact</Link>
           </nav>
           <div className={styles.toggleWrapper}>
