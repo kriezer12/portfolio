@@ -105,7 +105,7 @@
 }
 
 .captchaScale {
-  width: 303px;
+  width: 100%;
   transform-origin: left top;
 }
 
