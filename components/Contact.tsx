@@ -2,14 +2,17 @@
 import { FormEvent, useState } from 'react';
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { useTheme } from 'next-themes';
 import styles from './Contact.module.css';
 
 export default function Contact() {
+  const { resolvedTheme } = useTheme();
   const [result, setResult] = useState('');
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const hCaptchaSiteKey =
-    process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
+    process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
   const isCaptchaEnabled = Boolean(hCaptchaSiteKey);
+  const captchaTheme = resolvedTheme === 'dark' ? 'dark' : 'light';
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -106,10 +109,13 @@ export default function Contact() {
           <div className={styles.formGroup}>
             {hCaptchaSiteKey ? (
               <HCaptcha
+                key={`${hCaptchaSiteKey}-${captchaTheme}`}
                 sitekey={hCaptchaSiteKey}
+                theme={captchaTheme}
                 reCaptchaCompat={false}
                 onVerify={(token) => setCaptchaToken(token)}
                 onExpire={() => setCaptchaToken(null)}
+                onError={() => setResult('Captcha failed to load. Check site key domain settings.')}
               />
             ) : (
               <span className={styles.result}>Captcha unavailable. You can still submit the form.</span>
