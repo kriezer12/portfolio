@@ -12,8 +12,8 @@ const projects = [
   {
     id: 2,
     name: 'GLAM-ID',
-    description: 'Developed and maintained identity verification modules for government digital services, streamlining citizen access to public records.',
-    tags: ['Identity Management', 'Security', 'Web API', 'Frontend'],
+    description: 'A full-stack web application designed to power modern aesthetic clinics by enabling loyalty reward programs using NFC tags. It allows staff and customers to easily track visits, rewards, and membership status via NFC scans.',
+    tags: ['Identity Management', 'NFC', 'Web API', 'Frontend'],
     link: '#',
     status: 'completed',
   },
