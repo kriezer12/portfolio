@@ -20,10 +20,6 @@ function getErrorMessage(data: unknown): string {
     issues?: Array<{ message?: string }>;
   };
 
-  if (typeof payload.error === 'string' && payload.error.trim()) {
-    return payload.error;
-  }
-
   if (Array.isArray(payload.issues) && payload.issues.length > 0) {
     const issueMessage = payload.issues
       .map((issue) => issue?.message)
@@ -33,6 +29,10 @@ function getErrorMessage(data: unknown): string {
     if (issueMessage) {
       return issueMessage;
     }
+  }
+
+  if (typeof payload.error === 'string' && payload.error.trim()) {
+    return payload.error;
   }
 
   if (typeof payload.message === 'string' && payload.message.trim()) {
