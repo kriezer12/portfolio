@@ -7,17 +7,14 @@ import styles from './Contact.module.css';
 export default function Contact() {
   const [result, setResult] = useState('');
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const hCaptchaSiteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
+  const hCaptchaSiteKey =
+    process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
+  const isCaptchaEnabled = Boolean(hCaptchaSiteKey);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!hCaptchaSiteKey) {
-      setResult('Captcha site key is missing.');
-      return;
-    }
-
-    if (!captchaToken) {
+    if (isCaptchaEnabled && !captchaToken) {
       setResult('Please complete the captcha.');
       return;
     }
@@ -30,7 +27,7 @@ export default function Contact() {
       email: String(formData.get('email') || ''),
       message: String(formData.get('message') || ''),
       honeypot: String(formData.get('honeypot') || ''),
-      hCaptchaToken: captchaToken,
+      hCaptchaToken: isCaptchaEnabled ? captchaToken : null,
     };
 
     const response = await fetch('/api/contact', {
@@ -110,10 +107,12 @@ export default function Contact() {
             {hCaptchaSiteKey ? (
               <HCaptcha
                 sitekey={hCaptchaSiteKey}
+                reCaptchaCompat={false}
                 onVerify={(token) => setCaptchaToken(token)}
+                onExpire={() => setCaptchaToken(null)}
               />
             ) : (
-              <span className={styles.result}>Captcha is not configured.</span>
+              <span className={styles.result}>Captcha unavailable. You can still submit the form.</span>
             )}
           </div>
 
