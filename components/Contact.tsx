@@ -1,6 +1,7 @@
 'use client';
 import { FormEvent, useState } from 'react';
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import { Calendar } from 'lucide-react';
 import styles from './Contact.module.css';
 
 const MAX_MESSAGE_LENGTH = 25000;
@@ -57,6 +58,10 @@ export default function Contact() {
           <a href="mailto:osoriokenneth91@gmail.com" className={styles.socialItem}>
             <FaEnvelope size={18} />
             <span>Email</span>
+          </a>
+          <a href="https://calendly.com/kennethosorio/consultation" target="_blank" rel="noopener" className={styles.socialItem}>
+            <Calendar size={18} />
+            <span>Schedule Call</span>
           </a>
         </div>
 
