@@ -1,38 +1,53 @@
 'use client';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import styles from './Contact.module.css';
 
 export default function Contact() {
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState('');
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const hCaptchaSiteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 
-  const onSubmit = async (event: any) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-    if (!captchaToken) {
-      setResult("Please complete the captcha.");
+
+    if (!hCaptchaSiteKey) {
+      setResult('Captcha site key is missing.');
       return;
     }
 
-    setResult("Sending....");
-    const formData = new FormData(event.target);
-    formData.append("access_key", "5d018e2e-cced-4c42-bab7-95d70810bd0a");
-    formData.append("h-captcha-response", captchaToken);
+    if (!captchaToken) {
+      setResult('Please complete the captcha.');
+      return;
+    }
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData
+    setResult('Sending...');
+    const formData = new FormData(event.currentTarget);
+
+    const payload = {
+      name: String(formData.get('name') || ''),
+      email: String(formData.get('email') || ''),
+      message: String(formData.get('message') || ''),
+      honeypot: String(formData.get('honeypot') || ''),
+      hCaptchaToken: captchaToken,
+    };
+
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
     });
 
     const data = await response.json();
-    if (data.success) {
-      setResult("Form Submitted Successfully");
-      event.target.reset();
+    if (response.ok) {
+      setResult('Form Submitted Successfully');
+      event.currentTarget.reset();
       setCaptchaToken(null);
     } else {
-      setResult("Error: " + data.message);
+      setResult('Error: ' + (data.error || data.message || 'Submission failed.'));
     }
   };
 
@@ -82,11 +97,24 @@ export default function Contact() {
             <textarea name="message" id="message" required className={styles.textarea} placeholder="Tell me about your project..." rows={6} />
           </div>
 
+          <input
+            type="text"
+            name="honeypot"
+            tabIndex={-1}
+            autoComplete="off"
+            style={{ display: 'none' }}
+            aria-hidden="true"
+          />
+
           <div className={styles.formGroup}>
-            <HCaptcha
-              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-              onVerify={(token) => setCaptchaToken(token)}
-            />
+            {hCaptchaSiteKey ? (
+              <HCaptcha
+                sitekey={hCaptchaSiteKey}
+                onVerify={(token) => setCaptchaToken(token)}
+              />
+            ) : (
+              <span className={styles.result}>Captcha is not configured.</span>
+            )}
           </div>
 
           <button type="submit" className={styles.submit}>
