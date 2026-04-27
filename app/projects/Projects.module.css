@@ -1,18 +1,31 @@
-.projects {
-  width: 100%;
+.main {
+  padding: 120px var(--gutter) 80px;
+}
+
+.container {
   max-width: 896px;
   margin: 0 auto;
-  padding: 40px 0 0;
+}
+
+.header {
+  margin-bottom: 40px;
 }
 
 .headerTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
 }
 
-.viewAll {
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.backLink {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--primary);
@@ -21,28 +34,20 @@
   white-space: nowrap;
 }
 
-.viewAll:hover {
+.backLink:hover {
   opacity: 0.7;
 }
 
 .grid {
   display: grid;
-  gap: 16px;
+  gap: 24px;
 }
 
 .card {
   border: 1px solid var(--outline-variant);
-  padding: 1.1rem;
+  padding: 24px;
   background-color: var(--surface-container-low);
   border-radius: 16px;
-  transition: transform 150ms ease-in-out, border-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
-}
-
-.card:hover {
-  border-color: var(--outline);
-  background-color: var(--surface-container-high);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 .cardHeader {
@@ -50,12 +55,11 @@
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 12px;
-  gap: var(--gutter);
+  gap: 16px;
 }
 
 .cardTitle {
-  margin-bottom: 0;
-  flex: 1;
+  margin: 0;
 }
 
 .badge {
@@ -67,25 +71,16 @@
   text-transform: uppercase;
   border: 1px solid var(--outline-variant);
   white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.active {
-  border-color: var(--primary);
-  color: var(--primary);
-  background-color: transparent;
 }
 
 .live {
   border-color: var(--primary);
   color: var(--primary);
-  background-color: transparent;
 }
 
 .completed {
   border-color: var(--on-surface-variant);
   color: var(--on-surface-variant);
-  background-color: transparent;
 }
 
 .description {
@@ -103,7 +98,6 @@
 }
 
 .tag {
-  display: inline-block;
   padding: 4px 10px;
   background-color: var(--surface-container-low);
   border: 1px solid var(--outline-variant);
@@ -118,35 +112,10 @@
   gap: 4px;
   color: var(--primary);
   text-decoration: none;
-  border: none;
   font-size: 13px;
   font-weight: 500;
-  padding: 4px;
-  margin: -4px;
-  transition: all 150ms ease-in-out;
-}
-
-.link:hover {
-  background-color: transparent;
-  color: var(--secondary);
-}
-
-.arrow {
-  display: inline-block;
-  transition: transform 150ms ease-in-out;
 }
 
 .link:hover .arrow {
   transform: translateX(4px);
-}
-
-@media (max-width: 640px) {
-  .cardHeader {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .badge {
-    align-self: flex-start;
-  }
 }

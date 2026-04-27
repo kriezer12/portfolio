@@ -1,5 +1,9 @@
+.main {
+  padding: 120px var(--gutter) 80px;
+}
+
 .page {
-  padding: 80px var(--gutter) 40px;
+  padding: 0;
 }
 
 .container {

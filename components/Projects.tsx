@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './Projects.module.css';
 
 const projects = [
@@ -31,12 +32,14 @@ export default function Projects() {
   return (
     <section className={styles.projects} id="projects">
       <div className={styles.header}>
-        <h2>Projects</h2>
-        <span className={styles.count}>[{projects.length}]</span>
+        <div className={styles.headerTop}>
+          <h2>Projects</h2>
+          <Link href="/projects" className={styles.viewAll}>View All &gt;</Link>
+        </div>
       </div>
 
       <div className={styles.grid}>
-        {projects.map((project) => (
+        {projects.slice(0, 3).map((project) => (
           <article key={project.id} className={styles.card}>
             <div className={styles.cardHeader}>
               <h3 className={styles.cardTitle}>{project.name}</h3>
@@ -53,7 +56,7 @@ export default function Projects() {
               ))}
             </div>
 
-            <a href={project.link} className={styles.link}>
+            <a href={project.link} className={styles.link} target="_blank" rel="noopener noreferrer">
               View project
               <span className={styles.arrow}> →</span>
             </a>

@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import styles from './Certifications.module.css';
 
 const allCertifications = [
@@ -42,36 +44,43 @@ export default function CertificationsPage() {
   };
 
   return (
-    <section className={styles.page}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <div className={styles.headerTop}>
-            <h1 className={styles.title}>Certifications</h1>
-            <Link href="/" className={styles.backLink}>&lt; Back to Home</Link>
-          </div>
-        </div>
-        <div className={styles.grid}>
-          {allCertifications.map((cert, index) => (
-            <div 
-              key={index} 
-              className={styles.card}
-              onClick={() => cert.image && openImage(cert.image)}
-            >
-              <h3 className={styles.certTitle}>{cert.title}</h3>
-              <p className={styles.issuer}>{cert.issuer}</p>
+    <>
+      <Header />
+      <main className={styles.main}>
+        <section className={styles.page}>
+          <div className={styles.container}>
+            <div className={styles.header}>
+              <div className={styles.headerTop}>
+                <h1 className={styles.title}>Certifications</h1>
+                <div style={{ flex: 1 }}></div>
+                <Link href="/" className={styles.backLink}>&lt; Back to Home</Link>
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {selectedImage && (
-        <div className={styles.modalOverlay} onClick={() => setSelectedImage(null)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>&times;</button>
-            <img src={selectedImage} alt="Certification" className={styles.pdfViewer} />
+            <div className={styles.grid}>
+              {allCertifications.map((cert, index) => (
+                <div 
+                  key={index} 
+                  className={styles.card}
+                  onClick={() => cert.image && openImage(cert.image)}
+                >
+                  <h3 className={styles.certTitle}>{cert.title}</h3>
+                  <p className={styles.issuer}>{cert.issuer}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-    </section>
+
+          {selectedImage && (
+            <div className={styles.modalOverlay} onClick={() => setSelectedImage(null)}>
+              <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>&times;</button>
+                <img src={selectedImage} alt="Certification" className={styles.pdfViewer} />
+              </div>
+            </div>
+          )}
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }
