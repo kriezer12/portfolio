@@ -1,0 +1,29 @@
+.about {
+  padding: 40px 0 0;
+}
+
+.container {
+  max-width: 896px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 48rem;
+}
+
+.bio p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--on-surface-variant);
+}

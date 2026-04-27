@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --surface: #faf8f3;
+  --surface-dim: #f3efe8;
+  --surface-bright: #ffffff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fbf8f2;
+  --surface-container: #f4efe7;
+  --surface-container-high: #ede7dc;
+  --surface-container-highest: #e6dfd2;
+  --on-surface: #171717;
+  --on-surface-variant: #595959;
+  --outline: #cec6b7;
+  --outline-variant: #ded6c7;
+  --primary: #111111;
+  --on-primary: #ffffff;
+  --primary-container: #111111;
+  --on-primary-container: #ffffff;
+  --secondary: #6d6254;
+  --on-secondary: #ffffff;
+  --secondary-container: #e9e1d3;
+  --error: #b42318;
+  --on-error: #ffffff;
+  --background: #faf8f3;
+  --on-background: #171717;
+
+  --unit: 4px;
+  --gutter: 16px;
+  --margin: 24px;
+  --section-gap: 32px;
+}
+
+.dark {
+  --surface: #0f0f0f;
+  --surface-dim: #1a1a1a;
+  --surface-bright: #242424;
+  --surface-container-lowest: #050505;
+  --surface-container-low: #121212;
+  --surface-container: #1c1c1c;
+  --surface-container-high: #262626;
+  --surface-container-highest: #303030;
+  --on-surface: #e6e6e6;
+  --on-surface-variant: #a0a0a0;
+  --outline: #3d3d3d;
+  --outline-variant: #4a4a4a;
+  --primary: #ffffff;
+  --on-primary: #000000;
+  --primary-container: #ffffff;
+  --on-primary-container: #000000;
+  --secondary: #a69a8c;
+  --on-secondary: #000000;
+  --secondary-container: #2c2925;
+  --error: #f04438;
+  --on-error: #ffffff;
+  --background: #0a0a0a;
+  --on-background: #e6e6e6;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--on-background);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  background-attachment: fixed;
+  position: relative;
+}
+
+h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--margin);
+}
+
+h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  margin-bottom: calc(var(--margin) - 8px);
+}
+
+h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: var(--gutter);
+}
+
+p {
+  margin-bottom: var(--gutter);
+  color: var(--on-surface);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 150ms ease-in-out;
+}
+
+a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+section {
+  scroll-margin-top: 110px;
+}
+
+main {
+  width: 100%;
+  max-width: 896px;
+  margin: 0 auto;
+  padding: 96px var(--gutter) 40px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--outline-variant);
+  margin: var(--section-gap) 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--primary);
+  background-color: transparent;
+  color: var(--primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+code {
+  background-color: var(--surface-container-low);
+  padding: 2px 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--primary);
+}
+
+pre {
+  background-color: var(--surface-container-low);
+  padding: var(--gutter);
+  overflow-x: auto;
+  margin-bottom: var(--margin);
+  border: 1px solid var(--outline-variant);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  color: var(--on-surface);
+}
+
+.text-muted {
+  color: var(--on-surface-variant);
+}
+
+.text-accent {
+  color: var(--primary);
+}
+
+.divider-horizontal {
+  height: 1px;
+  background-color: var(--outline-variant);
+  margin: var(--section-gap) 0;
+}
+
+.grid {
+  display: grid;
+  gap: var(--margin);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter);
+}

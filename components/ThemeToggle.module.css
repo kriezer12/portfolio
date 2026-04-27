@@ -1,0 +1,23 @@
+.toggle {
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.toggle:hover {
+  background: var(--surface-container-high);
+  transform: scale(1.05);
+}
+
+.placeholder {
+  width: 40px;
+  height: 40px;
+}
