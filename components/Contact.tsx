@@ -1,118 +1,35 @@
 'use client';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { useTheme } from 'next-themes';
 import styles from './Contact.module.css';
 
 const MAX_MESSAGE_LENGTH = 25000;
-const CAPTCHA_BASE_WIDTH = 303;
-const CAPTCHA_BASE_HEIGHT = 78;
-
-function getErrorMessage(data: unknown): string {
-  if (!data || typeof data !== 'object') {
-    return 'Submission failed.';
-  }
-
-  const payload = data as {
-    error?: string;
-    message?: string;
-    issues?: Array<{ message?: string }>;
-  };
-
-  if (Array.isArray(payload.issues) && payload.issues.length > 0) {
-    const issueMessage = payload.issues
-      .map((issue) => issue?.message)
-      .filter((message): message is string => Boolean(message && message.trim()))
-      .join(', ');
-
-    if (issueMessage) {
-      return issueMessage;
-    }
-  }
-
-  if (typeof payload.error === 'string' && payload.error.trim()) {
-    return payload.error;
-  }
-
-  if (typeof payload.message === 'string' && payload.message.trim()) {
-    return payload.message;
-  }
-
-  return 'Submission failed.';
-}
 
 export default function Contact() {
-  const { resolvedTheme } = useTheme();
   const [result, setResult] = useState('');
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const [showCaptcha, setShowCaptcha] = useState(false);
   const [messageLength, setMessageLength] = useState(0);
-  const [captchaScale, setCaptchaScale] = useState(1);
-  const hCaptchaSiteKey =
-    process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
-  const isCaptchaEnabled = Boolean(hCaptchaSiteKey);
-  const captchaTheme = resolvedTheme === 'dark' ? 'dark' : 'light';
-  const captchaContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!showCaptcha || !isCaptchaEnabled) {
-      return;
-    }
-
-    const updateScale = () => {
-      const containerWidth = captchaContainerRef.current?.clientWidth ?? CAPTCHA_BASE_WIDTH;
-      const nextScale = Math.min(1.5, Math.max(1, containerWidth / CAPTCHA_BASE_WIDTH));
-      setCaptchaScale(Number(nextScale.toFixed(2)));
-    };
-
-    updateScale();
-    window.addEventListener('resize', updateScale);
-    return () => {
-      window.removeEventListener('resize', updateScale);
-    };
-  }, [showCaptcha, isCaptchaEnabled]);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (isCaptchaEnabled && !showCaptcha) {
-      setShowCaptcha(true);
-      setResult('Click Name field detected. Please complete captcha to continue.');
-      return;
-    }
-
-    if (isCaptchaEnabled && !captchaToken) {
-      setResult('Please complete the captcha.');
-      return;
-    }
-
     setResult('Sending...');
+    
     const formData = new FormData(event.currentTarget);
+    formData.append('access_key', '5d018e2e-cced-4c42-bab7-95d70810bd0a');
 
-    const payload = {
-      name: String(formData.get('name') || ''),
-      email: String(formData.get('email') || ''),
-      message: String(formData.get('message') || ''),
-      honeypot: String(formData.get('honeypot') || ''),
-      hCaptchaToken: isCaptchaEnabled ? captchaToken : null,
-    };
-
-    const response = await fetch('/api/contact', {
+    const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
+      body: formData,
     });
 
     const data = await response.json();
-    if (response.ok) {
+
+    if (data.success) {
       setResult('Form Submitted Successfully');
       event.currentTarget.reset();
-      setCaptchaToken(null);
+      setMessageLength(0);
     } else {
-      setResult('Error: ' + getErrorMessage(data));
+      setResult('Error: ' + (data.message || 'Submission failed.'));
     }
   };
 
@@ -156,8 +73,6 @@ export default function Contact() {
               required
               className={styles.input}
               placeholder="Your name"
-              onFocus={() => setShowCaptcha(true)}
-              onClick={() => setShowCaptcha(true)}
             />
           </div>
 
@@ -179,41 +94,6 @@ export default function Contact() {
               onChange={(event) => setMessageLength(event.target.value.length)}
             />
             <span className={styles.charCount}>{messageLength}/{MAX_MESSAGE_LENGTH} characters</span>
-          </div>
-
-          <input
-            type="text"
-            name="honeypot"
-            tabIndex={-1}
-            autoComplete="off"
-            style={{ display: 'none' }}
-            aria-hidden="true"
-          />
-
-          <div className={styles.formGroup}>
-            {hCaptchaSiteKey && showCaptcha ? (
-              <div
-                className={styles.captchaShell}
-                ref={captchaContainerRef}
-                style={{ height: `${CAPTCHA_BASE_HEIGHT * captchaScale}px` }}
-              >
-                <div className={styles.captchaScale} style={{ transform: `scale(${captchaScale})` }}>
-                  <HCaptcha
-                    key={`${hCaptchaSiteKey}-${captchaTheme}`}
-                    sitekey={hCaptchaSiteKey}
-                    theme={captchaTheme}
-                    reCaptchaCompat={false}
-                    onVerify={(token) => setCaptchaToken(token)}
-                    onExpire={() => setCaptchaToken(null)}
-                    onError={() => setResult('Captcha failed to load. Check site key domain settings.')}
-                  />
-                </div>
-              </div>
-            ) : hCaptchaSiteKey ? (
-              <span className={styles.result}>Captcha loads when you click the Name field.</span>
-            ) : (
-              <span className={styles.result}>Captcha unavailable. You can still submit the form.</span>
-            )}
           </div>
 
           <button type="submit" className={styles.submit}>

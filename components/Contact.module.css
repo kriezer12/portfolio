@@ -99,16 +99,6 @@
   align-self: flex-end;
 }
 
-.captchaShell {
-  width: 100%;
-  overflow: hidden;
-}
-
-.captchaScale {
-  width: 100%;
-  transform-origin: left top;
-}
-
 .input:focus,
 .textarea:focus {
   outline: none;
