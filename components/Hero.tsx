@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { MapPin, GraduationCap } from 'lucide-react';
+import { MapPin, GraduationCap, Mail, FolderGit2 } from 'lucide-react';
 import styles from './Hero.module.css';
 
 export default function Hero() {
@@ -32,18 +32,20 @@ export default function Hero() {
               <span>Polytechnic University of the Philippines</span>
             </div>
           </div>
-
-          <p className={styles.description}>
-            Bridging the gap between development and operations. Currently focused on Fullstack development, Cloud Infrastructure, and automating workflows.
-          </p>
           
           <div className={styles.actions}>
-            <a href="#contact" className={styles.primaryCta}>
-              Let's Talk
+            <a href="#contact" className={styles.actionLink}>
+              <Mail size={14} /> Contact Me
             </a>
-            <a href="#projects" className={styles.secondaryCta}>Selected Projects</a>
+            <span>•</span>
+            <a href="#projects" className={styles.actionLink}>
+              <FolderGit2 size={14} /> View my Projects
+            </a>
           </div>
         </div>
+      </div>
+      <div className={styles.dividerContainer}>
+        <hr className={styles.divider} />
       </div>
     </section>
   );
