@@ -3,6 +3,14 @@ import styles from './Projects.module.css';
 const projects = [
   {
     id: 1,
+    name: 'DevDigest',
+    description: 'An AI-powered GitHub digest tool that summarizes team activity and delivers daily briefings to Discord. Evolved from a simple n8n workflow to a robust cloud-native architecture using AWS Lambda, EC2, and Docker.',
+    tags: ['AI', 'AWS', 'Docker', 'n8n', 'Next.js', 'Vercel'],
+    link: 'https://v0-devdigest-web-app.vercel.app/',
+    status: 'live',
+  },
+  {
+    id: 2,
     name: 'GLAM-ID',
     description: 'Developed and maintained identity verification modules for government digital services, streamlining citizen access to public records.',
     tags: ['Identity Management', 'Security', 'Web API', 'Frontend'],
@@ -10,7 +18,7 @@ const projects = [
     status: 'completed',
   },
   {
-    id: 2,
+    id: 3,
     name: 'Municipal HR Management System',
     description: 'Spearheaded a 5-person team to develop an end-to-end HR management solution for local municipalities. Adopted as a capstone project reference and aligned with Sustainable Development Goals.',
     tags: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript'],
