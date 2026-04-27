@@ -13,7 +13,7 @@ function getWeb3FormsAccessKey() {
 const contactSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
-  message: z.string().min(10),
+  message: z.string().min(10).max(25000),
   honeypot: z.string().optional(),
   hCaptchaToken: z.string().optional(),
 });
@@ -58,7 +58,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: 'Form submitted successfully.' }, { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.issues }, { status: 400 });
+      return NextResponse.json(
+        {
+          error: 'Validation failed.',
+          issues: error.issues,
+        },
+        { status: 400 }
+      );
     }
     return NextResponse.json({ error: 'Failed to submit contact form.' }, { status: 500 });
   }

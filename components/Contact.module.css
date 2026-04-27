@@ -89,6 +89,26 @@
   transition: all 0.2s ease;
 }
 
+.textarea {
+  resize: none;
+}
+
+.charCount {
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+  align-self: flex-end;
+}
+
+.captchaShell {
+  width: 100%;
+  overflow: hidden;
+}
+
+.captchaScale {
+  width: 303px;
+  transform-origin: left top;
+}
+
 .input:focus,
 .textarea:focus {
   outline: none;
