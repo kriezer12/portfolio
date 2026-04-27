@@ -1,38 +1,38 @@
 'use client';
 import { useState } from 'react';
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import styles from './Contact.module.css';
 
 export default function Contact() {
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [result, setResult] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus('loading');
+  const onSubmit = async (event: any) => {
+    event.preventDefault();
+    
+    if (!captchaToken) {
+      setResult("Please complete the captcha.");
+      return;
+    }
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message'),
-      honeypot: formData.get('honeypot'),
-    };
+    setResult("Sending....");
+    const formData = new FormData(event.target);
+    formData.append("access_key", "5d018e2e-cced-4c42-bab7-95d70810bd0a");
+    formData.append("h-captcha-response", captchaToken);
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
 
-      if (res.ok) {
-        setStatus('success');
-        e.currentTarget.reset();
-      } else {
-        setStatus('error');
-      }
-    } catch (err) {
-      setStatus('error');
+    const data = await response.json();
+    if (data.success) {
+      setResult("Form Submitted Successfully");
+      event.target.reset();
+      setCaptchaToken(null);
+    } else {
+      setResult("Error: " + data.message);
     }
   };
 
@@ -66,10 +66,7 @@ export default function Contact() {
           </a>
         </div>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
-          {/* Honeypot field */}
-          <input type="text" name="honeypot" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
-
+        <form className={styles.form} onSubmit={onSubmit}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>Name</label>
             <input type="text" name="name" id="name" required className={styles.input} placeholder="Your name" />
@@ -85,12 +82,18 @@ export default function Contact() {
             <textarea name="message" id="message" required className={styles.textarea} placeholder="Tell me about your project..." rows={6} />
           </div>
 
-          <button type="submit" className={styles.submit} disabled={status === 'loading'}>
-            {status === 'loading' ? 'Sending...' : 'Send Message'}
+          <div className={styles.formGroup}>
+            <HCaptcha
+              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+              onVerify={(token) => setCaptchaToken(token)}
+            />
+          </div>
+
+          <button type="submit" className={styles.submit}>
+            Send Message
           </button>
           
-          {status === 'success' && <p className={styles.success}>Message sent successfully!</p>}
-          {status === 'error' && <p className={styles.error}>Failed to send message. Please try again.</p>}
+          <span className={styles.result}>{result}</span>
         </form>
       </div>
     </section>
