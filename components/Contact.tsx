@@ -1,14 +1,12 @@
 'use client';
 import { FormEvent, useState } from 'react';
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
-import { useTheme } from 'next-themes';
 import styles from './Contact.module.css';
 
 const MAX_MESSAGE_LENGTH = 25000;
 
 export default function Contact() {
   const [result, setResult] = useState('');
-  const [messageLength, setMessageLength] = useState(0);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,7 +25,6 @@ export default function Contact() {
     if (data.success) {
       setResult('Form Submitted Successfully');
       event.currentTarget.reset();
-      setMessageLength(0);
     } else {
       setResult('Error: ' + (data.message || 'Submission failed.'));
     }
@@ -91,9 +88,7 @@ export default function Contact() {
               placeholder="Tell me about your project..."
               rows={6}
               maxLength={MAX_MESSAGE_LENGTH}
-              onChange={(event) => setMessageLength(event.target.value.length)}
             />
-            <span className={styles.charCount}>{messageLength}/{MAX_MESSAGE_LENGTH} characters</span>
           </div>
 
           <button type="submit" className={styles.submit}>

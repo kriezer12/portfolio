@@ -93,12 +93,6 @@
   resize: none;
 }
 
-.charCount {
-  font-size: 0.75rem;
-  color: var(--on-surface-variant);
-  align-self: flex-end;
-}
-
 .input:focus,
 .textarea:focus {
   outline: none;
