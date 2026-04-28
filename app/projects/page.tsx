@@ -23,9 +23,9 @@ const allProjects = [
   {
     id: 3,
     name: 'Municipal HR Management System',
-    description: 'Spearheaded a 5-person team to develop an end-to-end HR management solution for local municipalities. Adopted as a capstone project reference and aligned with Sustainable Development Goals.',
+    description: 'Municipal HR Management System is a prototype HR platform built as a capstone/web-dev project by a 5‑person team for Web Dev (2425 DIT 3-2), designed to simulate a real-world municipal HR environment for the Municipality of Concepción. The system models core HR workflows (hiring, onboarding, attendance, performance tracking, and reporting).',
     tags: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript'],
-    link: '#',
+    link: 'https://municipal-hr-management-system.vercel.app/',
     status: 'completed',
   },
 ];
