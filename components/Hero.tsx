@@ -59,11 +59,14 @@ export default function Hero() {
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <button className={styles.closeButton} onClick={() => setShowCV(false)}><X size={24} /></button>
             <div className={styles.modalActions}>
-                <a href="/cv/Curriculum Vitae - Osorio, Kenneth.pdf" download className={styles.downloadButton}>
+                <a href="/cv/CV_Osorio,Kenneth.pdf" download className={styles.downloadButton}>
                     <Download size={20} />
                 </a>
             </div>
-            <img src="/cv/Curriculum Vitae - Osorio, Kenneth.jpg" alt="CV Preview" className={styles.pdfViewer} />
+            <div className={styles.cvViewerContainer} style={{ overflowY: 'auto', maxHeight: '80vh' }}>
+                <img src="/cv/CV_Osorio,Kenneth_page-0001.jpg" alt="CV Page 1" className={styles.pdfViewer} style={{ width: '100%', marginBottom: '10px' }} />
+                <img src="/cv/CV_Osorio,Kenneth_page-0002.jpg" alt="CV Page 2" className={styles.pdfViewer} style={{ width: '100%' }} />
+            </div>
           </div>
         </div>
       )}
