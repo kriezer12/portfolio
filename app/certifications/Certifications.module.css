@@ -141,6 +141,8 @@
   max-height: 80vh;
   object-fit: contain;
   display: block;
+  pointer-events: none;
+  user-select: none;
 }
 
 @keyframes fadeIn {
