@@ -1,13 +1,47 @@
+import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import Background3D from '@/components/Background3D';
 
-export const metadata = {
-  title: 'Kenneth Osorio - Software Engineer',
-  description: 'Personal portfolio of Kenneth Osorio, specializing in AI, Software Engineering, DevOps, and Cloud.',
+export const metadata: Metadata = {
+  metadataBase: new URL('https://kennethosorio.dev'),
+  title: {
+    default: 'Kenneth Osorio - Software Engineer',
+    template: '%s | Kenneth Osorio',
+  },
+  description: 'Fullstack Developer & DevOps Intern building scalable AI solutions and cloud infrastructure. Explore Kenneth Osorio\'s portfolio for projects in Next.js, AWS, and Automation.',
+  keywords: ['Kenneth Osorio', 'Software Engineer', 'Fullstack Developer', 'DevOps', 'AI', 'Cloud', 'Next.js', 'React', 'AWS', 'Philippines'],
+  authors: [{ name: 'Kenneth Osorio' }],
+  creator: 'Kenneth Osorio',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://kennethosorio.dev',
+    siteName: 'Kenneth Osorio Portfolio',
+    title: 'Kenneth Osorio - Software Engineer',
+    description: 'Fullstack Developer & DevOps Intern building scalable AI solutions and cloud infrastructure. Projects in Next.js, AWS, and Automation.',
+    images: [
+      {
+        url: '/profile.jpg',
+        width: 800,
+        height: 800,
+        alt: 'Kenneth Osorio',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Kenneth Osorio - Software Engineer',
+    description: 'Fullstack Developer & DevOps Intern building scalable AI solutions and cloud infrastructure.',
+    images: ['/profile.jpg'],
+    creator: '@thirsty_samurai', // Replace with your actual handle if different
+  },
   icons: {
     icon: '/profile.jpg',
     apple: '/profile.jpg',
+  },
+  alternates: {
+    canonical: '/',
   },
 };
 
