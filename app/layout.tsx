@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: 'Kenneth Osorio - Software Engineer',
     template: '%s | Kenneth Osorio',
   },
-  description: 'Fullstack Developer & DevOps Intern building scalable AI solutions and cloud infrastructure. Explore Kenneth Osorio\'s portfolio for projects in Next.js, AWS, and Automation.',
+  description: 'Fullstack Developer & DevOps building scalable AI solutions and cloud infrastructure. Explore Kenneth Osorio\'s portfolio for projects in Next.js, AWS, and Automation.',
   keywords: ['Kenneth Osorio', 'Software Engineer', 'Fullstack Developer', 'DevOps', 'AI', 'Cloud', 'Next.js', 'React', 'AWS', 'Philippines'],
   authors: [{ name: 'Kenneth Osorio' }],
   creator: 'Kenneth Osorio',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: 'https://kennethosorio.dev',
     siteName: 'Kenneth Osorio Portfolio',
     title: 'Kenneth Osorio - Software Engineer',
-    description: 'Fullstack Developer & DevOps Intern building scalable AI solutions and cloud infrastructure. Projects in Next.js, AWS, and Automation.',
+    description: 'Fullstack Developer & DevOps building scalable AI solutions and cloud infrastructure. Projects in Next.js, AWS, and Automation.',
     images: [
       {
         url: '/og-image.png',
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Kenneth Osorio - Software Engineer',
-    description: 'Fullstack Developer & DevOps Intern building scalable AI solutions and cloud infrastructure.',
+    description: 'Fullstack Developer & DevOps building scalable AI solutions and cloud infrastructure.',
     images: ['/profile.jpg'],
-    creator: '@thirsty_samurai', // Replace with your actual handle if different
+    creator: '@thirsty_samurai', 
   },
   icons: {
     icon: '/profile.jpg',
