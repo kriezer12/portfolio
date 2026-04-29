@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     description: 'Fullstack Developer & DevOps Intern building scalable AI solutions and cloud infrastructure. Projects in Next.js, AWS, and Automation.',
     images: [
       {
-        url: '/profile.jpg',
-        width: 800,
-        height: 800,
-        alt: 'Kenneth Osorio',
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Kenneth Osorio Portfolio',
       },
     ],
   },
