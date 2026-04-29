@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Kenneth Osorio - Software Engineer',
     description: 'Fullstack Developer & DevOps building scalable AI solutions and cloud infrastructure.',
-    images: ['/profile.jpg'],
+    images: ['/og-image.png'],
     creator: '@thirsty_samurai', 
   },
   icons: {
