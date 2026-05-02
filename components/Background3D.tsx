@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useLayoutEffect } from 'react';
 import * as THREE from 'three';
 import { useTheme } from 'next-themes';
 
@@ -8,14 +8,13 @@ export default function Background3D() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { theme, resolvedTheme } = useTheme();
   
-  // Use a ref for theme to avoid re-creating the entire effect on theme change
   const themeRef = useRef(resolvedTheme || theme);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     themeRef.current = resolvedTheme || theme;
   }, [theme, resolvedTheme]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!containerRef.current) return;
 
     const scene = new THREE.Scene();
@@ -25,9 +24,11 @@ export default function Background3D() {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // Ensure element is inserted synchronously
     containerRef.current.appendChild(renderer.domElement);
 
-    // --- Particles ---
+    // ... (rest of the particle and ripple logic remains the same)
     const particleCount = 2000;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
@@ -55,7 +56,6 @@ export default function Background3D() {
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
-    // --- Multi-Ring Water Ripple ---
     const rippleGroup = new THREE.Group();
     scene.add(rippleGroup);
 
@@ -77,7 +77,6 @@ export default function Background3D() {
       ringMaterials.push(ringMat);
     }
 
-    // --- State ---
     const mouse = { x: 0, y: 0 };
     const target = { x: 0, y: 0 };
     const targetZ = 1000;
@@ -178,7 +177,6 @@ export default function Background3D() {
 
     animate();
 
-    // Export refs for reactive theme updates
     (containerRef as any)._three = { material, ringMaterials };
 
     return () => {
@@ -199,6 +197,7 @@ export default function Background3D() {
       if (containerRef.current) containerRef.current.removeChild(renderer.domElement);
     };
   }, []);
+
 
   useEffect(() => {
     const three = (containerRef as any)._three;
