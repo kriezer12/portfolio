@@ -118,13 +118,29 @@
 .card {
   background: var(--surface-container-low);
   border: 1px solid var(--outline-variant);
-  padding: 1.1rem;
+  padding: 1.5rem;
   border-radius: 16px;
   transition: all 0.2s ease;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+}
+
+.hoverPreview {
+  position: fixed;
+  width: 200px;
+  background: white;
+  padding: 4px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
 }
 
 .card:hover {
@@ -143,19 +159,23 @@
 .meta {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 6px;
+  font-size: 0.95rem;
   color: var(--on-surface-variant);
-  font-size: 0.85rem;
-  margin-bottom: 0.75rem;
-  font-family: monospace;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.issuer {
+  color: var(--primary);
 }
 
 .dot {
-  opacity: 0.5;
+  font-size: 1rem;
 }
 
 .description {
   color: var(--on-surface-variant);
   font-size: 0.94rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }

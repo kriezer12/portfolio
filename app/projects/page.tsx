@@ -1,15 +1,26 @@
+'use client';
+
+import { useState, useCallback } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { ProjectCard } from '@/components/ProjectCard';
+import { ProjectLightbox } from '@/components/ProjectLightbox';
 import styles from './Projects.module.css';
 
-export const metadata: Metadata = {
-  title: 'Projects',
-  description: 'Explore a showcase of my technical projects, ranging from AI-powered tools and cloud-native applications to NFC-enabled systems and full-stack solutions.',
-};
+interface Project {
+  id: number;
+  name: string;
+  description: string;
+  tags: string[];
+  link: string;
+  status: string;
+  extendedDescription?: string;
+  media?: string[];
+}
 
-const allProjects = [
+const allProjects: Project[] = [
   {
     id: 1,
     name: 'DevDigest',
@@ -17,26 +28,42 @@ const allProjects = [
     tags: ['AI', 'AWS', 'Docker', 'n8n', 'Next.js', 'Vercel'],
     link: 'https://v0-devdigest-web-app.vercel.app/',
     status: 'live',
+    extendedDescription: 'DevDigest was built to solve the information overload in development teams. It uses GitHub webhooks and AI to parse commits and issues into concise summaries, improving team transparency without manual reporting.',
+    media: ['/projects/gitdigest/001.png', '/projects/gitdigest/002.png', '/projects/gitdigest/003.png', '/projects/gitdigest/004.png', '/projects/gitdigest/005.png'],
   },
   {
     id: 2,
     name: 'GLAM-ID',
     description: 'A full-stack web application designed to power modern aesthetic clinics by enabling loyalty reward programs using NFC tags. It allows staff and customers to easily track visits, rewards, and membership status via NFC scans.',
-    tags: ['Identity Management', 'NFC', 'Web API', 'Frontend'],
+    tags: ['React', 'Vite', 'Tailwind', 'TypeScript', 'Supabase', 'Docker', 'DevOps', 'NFC'],
     link: '#',
     status: 'completed',
+    extendedDescription: 'GLAM-ID bridges the physical and digital space in aesthetic clinics. By leveraging NFC, it eliminates physical membership cards and integrates seamless loyalty tracking directly into the clinic\'s workflow.',
+    media: [],
   },
   {
     id: 3,
     name: 'Municipal HR Management System',
-    description: 'Municipal HR Management System is a prototype HR platform built as a capstone/web-dev project by a 5‑person team for Web Dev (2425 DIT 3-2), designed to simulate a real-world municipal HR environment for the Municipality of Concepción. The system models core HR workflows (hiring, onboarding, attendance, performance tracking, and reporting).',
+    description: 'Municipal HR Management System is a prototype HR platform built as a web-dev project by a 5‑person team for Web Dev (2425 DIT 3-2), designed to simulate a real-world municipal HR environment for the Municipality of Concepción. The system models core HR workflows (hiring, onboarding, attendance, performance tracking, and reporting).',
     tags: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript'],
     link: 'https://municipal-hr-management-system.vercel.app/',
     status: 'completed',
+    extendedDescription: 'This system provides a comprehensive HR solution including employee records, attendance monitoring, and performance management, specifically tailored for municipal government HR processes.',
+    media: ['/projects/municipal-hrm/001.png', '/projects/municipal-hrm/002.png', '/projects/municipal-hrm/003.png', '/projects/municipal-hrm/004.png', '/projects/municipal-hrm/005.png', '/projects/municipal-hrm/006.png', '/projects/municipal-hrm/007.png', '/projects/municipal-hrm/008.png'],
   },
 ];
 
 export default function ProjectsPage() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const handleOpen = useCallback((project: Project) => {
+    setSelectedProject(project);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setSelectedProject(null);
+  }, []);
+
   return (
     <>
       <Header />
@@ -52,29 +79,11 @@ export default function ProjectsPage() {
 
           <div className={styles.grid}>
             {allProjects.map((project) => (
-              <article key={project.id} className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <h3 className={styles.cardTitle}>{project.name}</h3>
-                  <span className={`${styles.badge} ${styles[project.status]}`}>
-                    {project.status}
-                  </span>
-                </div>
-
-                <p className={styles.description}>{project.description}</p>
-
-                <div className={styles.tags}>
-                  {project.tags.map((tag) => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
-                  ))}
-                </div>
-
-                <a href={project.link} className={styles.link} target="_blank" rel="noopener noreferrer">
-                  View project
-                  <span className={styles.arrow}> →</span>
-                </a>
-              </article>
+              <ProjectCard key={project.id} project={project} onClick={handleOpen} />
             ))}
           </div>
+
+          <ProjectLightbox project={selectedProject} onClose={handleClose} />
         </div>
       </main>
       <Footer />
