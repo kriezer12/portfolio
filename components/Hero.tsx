@@ -64,8 +64,22 @@ export default function Hero() {
                 </a>
             </div>
             <div className={styles.cvViewerContainer} style={{ overflowY: 'auto', maxHeight: '80vh' }}>
-                <img src="/cv/CV_Osorio,Kenneth_page-0001.jpg" alt="CV Page 1" className={styles.pdfViewer} style={{ width: '100%', marginBottom: '10px' }} />
-                <img src="/cv/CV_Osorio,Kenneth_page-0002.jpg" alt="CV Page 2" className={styles.pdfViewer} style={{ width: '100%' }} />
+                <div style={{ position: 'relative', width: '100%', height: '1100px', marginBottom: '10px' }}>
+                  <Image 
+                    src="/cv/CV_Osorio,Kenneth_page-0001.jpg" 
+                    alt="Kenneth Osorio Curriculum Vitae Page 1" 
+                    fill 
+                    style={{ objectFit: 'contain' }}
+                  />
+                </div>
+                <div style={{ position: 'relative', width: '100%', height: '1100px' }}>
+                  <Image 
+                    src="/cv/CV_Osorio,Kenneth_page-0002.jpg" 
+                    alt="Kenneth Osorio Curriculum Vitae Page 2" 
+                    fill 
+                    style={{ objectFit: 'contain' }}
+                  />
+                </div>
             </div>
           </div>
         </div>

@@ -7,6 +7,8 @@ import { useTheme } from 'next-themes';
 export default function Background3D() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { theme, resolvedTheme } = useTheme();
+  
+  // Use a ref for theme to avoid re-creating the entire effect on theme change
   const themeRef = useRef(resolvedTheme || theme);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function Background3D() {
     camera.position.z = 1000;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
@@ -47,6 +49,7 @@ export default function Background3D() {
       opacity: 0.6,
       blending: THREE.NormalBlending,
       sizeAttenuation: true,
+      color: themeRef.current === 'dark' ? 0xffffff : 0x000000
     });
 
     const particles = new THREE.Points(geometry, material);
@@ -63,7 +66,7 @@ export default function Background3D() {
     for (let i = 0; i < ringCount; i++) {
       const ringGeo = new THREE.RingGeometry(1, 1.05, 64);
       const ringMat = new THREE.MeshBasicMaterial({
-        color: 0x000000,
+        color: themeRef.current === 'dark' ? 0xffffff : 0x000000,
         transparent: true,
         opacity: 0,
         side: THREE.DoubleSide
@@ -77,7 +80,7 @@ export default function Background3D() {
     // --- State ---
     const mouse = { x: 0, y: 0 };
     const target = { x: 0, y: 0 };
-    let targetZ = 1000;
+    const targetZ = 1000;
     let rippleActive = false;
     let rippleTime = 0;
 
@@ -100,8 +103,11 @@ export default function Background3D() {
       rippleActive = true;
     };
 
+    let scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    let lastScrollY = scrollY;
+    let scrollVelocity = 0;
     const onScroll = () => {
-      targetZ = 1000 + window.scrollY * 0.6;
+      scrollY = window.scrollY;
     };
 
     const onResize = () => {
@@ -110,26 +116,49 @@ export default function Background3D() {
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('click', onMouseClick);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
 
-    const animate = () => {
-      requestAnimationFrame(animate);
+    let animationFrameId: number;
 
-      target.x += (mouse.x * 150 - target.x) * 0.05;
-      target.y += (-mouse.y * 150 - target.y) * 0.05;
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate);
+
+      const scrollDiff = scrollY - lastScrollY;
+      scrollVelocity -= scrollDiff * 0.15;
+      lastScrollY = scrollY;
+      scrollVelocity *= 0.9;
+
+      target.x += (mouse.x * 15 - target.x) * 0.05;
+      target.y += (-mouse.y * 15 - target.y) * 0.05; 
+      
       camera.position.x += (target.x - camera.position.x) * 0.05;
       camera.position.y += (target.y - camera.position.y) * 0.05;
       camera.position.z += (targetZ - camera.position.z) * 0.05;
+      
       camera.lookAt(scene.position);
 
-      const isDark = themeRef.current === 'dark';
-      material.color.setHex(isDark ? 0xffffff : 0x000000);
-      material.opacity = isDark ? 0.6 : 0.4;
+      // Rotation and space travel
+      particles.rotation.y += 0.00003;
 
-      particles.rotation.y += 0.0003;
+      const forwardSpeed = 0.5 + scrollVelocity;
+      const positionsArray = geometry.attributes.position.array as Float32Array;
+      for (let i = 0; i < particleCount; i++) {
+        positionsArray[i * 3 + 2] += forwardSpeed;
+
+        if (positionsArray[i * 3 + 2] > 1200) {
+          positionsArray[i * 3 + 2] = -1000;
+          positionsArray[i * 3 + 0] = (Math.random() - 0.5) * 2200;
+          positionsArray[i * 3 + 1] = (Math.random() - 0.5) * 2200;
+        } else if (positionsArray[i * 3 + 2] < -1000) {
+          positionsArray[i * 3 + 2] = 1200;
+          positionsArray[i * 3 + 0] = (Math.random() - 0.5) * 2200;
+          positionsArray[i * 3 + 1] = (Math.random() - 0.5) * 2200;
+        }
+      }
+      geometry.attributes.position.needsUpdate = true;
 
       if (rippleActive) {
         rippleTime += 0.015;
@@ -140,7 +169,6 @@ export default function Background3D() {
             const scale = t * 400;
             ring.scale.set(scale, scale, 1);
             ringMaterials[i].opacity = (1 - t) * 0.5;
-            ringMaterials[i].color.setHex(isDark ? 0xffffff : 0x000000);
           } else {
             ringMaterials[i].opacity = 0;
           }
@@ -153,14 +181,39 @@ export default function Background3D() {
 
     animate();
 
+    // Export refs for reactive theme updates
+    (containerRef as any)._three = { material, ringMaterials };
+
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('click', onMouseClick);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
+      
+      geometry.dispose();
+      material.dispose();
+      rings.forEach(r => {
+        r.geometry.dispose();
+        (r.material as THREE.Material).dispose();
+      });
+      renderer.dispose();
+      
       if (containerRef.current) containerRef.current.removeChild(renderer.domElement);
     };
   }, []);
+
+  useEffect(() => {
+    const three = (containerRef as any)._three;
+    if (!three) return;
+    
+    const isDark = resolvedTheme === 'dark';
+    const color = isDark ? 0xffffff : 0x000000;
+    
+    three.material.color.setHex(color);
+    three.material.opacity = isDark ? 0.6 : 0.4;
+    three.ringMaterials.forEach((m: THREE.MeshBasicMaterial) => m.color.setHex(color));
+  }, [resolvedTheme]);
 
   return (
     <div ref={containerRef} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -2, pointerEvents: 'none' }} />

@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   margin: 0;
@@ -36,6 +38,7 @@ body {
 }
 
 :root {
+  --font-jetbrains-mono: var(--font-jetbrains-mono);
   --surface: #faf8f3;
   --surface-dim: #f3efe8;
   --surface-bright: #ffffff;
@@ -95,7 +98,7 @@ body {
 body {
   background-color: var(--background);
   color: var(--on-background);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-jetbrains-mono);
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -104,7 +107,7 @@ body {
 }
 
 h1 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-jetbrains-mono);
   font-size: 28px;
   font-weight: 700;
   line-height: 32px;
@@ -113,7 +116,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-jetbrains-mono);
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -122,7 +125,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-jetbrains-mono);
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
@@ -168,7 +171,7 @@ hr {
   border: 1px solid var(--primary);
   background-color: transparent;
   color: var(--primary);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-jetbrains-mono);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -187,7 +190,7 @@ hr {
 code {
   background-color: var(--surface-container-low);
   padding: 2px 6px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-jetbrains-mono);
   font-size: 13px;
   color: var(--primary);
 }
