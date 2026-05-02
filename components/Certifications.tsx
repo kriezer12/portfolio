@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Certifications.module.css';
 
 const certifications = [
@@ -16,7 +17,7 @@ const certifications = [
     issuer: 'IBM',
     date: '2026',
     description: 'Introduction to Docker concepts, containers, and images for developers.',
-    image: '/certifications/IBM CO0101EN Certificate _ Cognitive Class.jpg',
+    image: '/certifications/docker-essentials.jpg',
   },
   {
     title: 'Introduction to Modern AI',
@@ -77,7 +78,15 @@ export default function Certifications() {
         <div className={styles.modalOverlay} onClick={() => setSelectedImage(null)}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>&times;</button>
-            <img src={selectedImage} alt="Certification" className={styles.pdfViewer} />
+            <div style={{ position: 'relative', width: '100%', height: '80vh' }}>
+              <Image 
+                src={selectedImage} 
+                alt="Certification Document" 
+                fill 
+                className={styles.pdfViewer}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
           </div>
         </div>
       )}

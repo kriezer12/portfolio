@@ -1,7 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import styles from './Projects.module.css';
+
+export const metadata: Metadata = {
+  title: 'Projects',
+  description: 'Explore a showcase of my technical projects, ranging from AI-powered tools and cloud-native applications to NFC-enabled systems and full-stack solutions.',
+};
 
 const allProjects = [
   {

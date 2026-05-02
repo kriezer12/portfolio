@@ -1,7 +1,13 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import styles from './TechStack.module.css';
+
+export const metadata: Metadata = {
+  title: 'Tech Stack',
+  description: 'A comprehensive list of the technologies, frameworks, and tools I use to build scalable digital solutions, including Next.js, Python, AWS, and DevOps tools.',
+};
 
 const allSkills = [
   {

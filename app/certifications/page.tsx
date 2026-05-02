@@ -1,9 +1,14 @@
-'use client';
-import { useState } from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CertificationsList from './CertificationsList';
 import styles from './Certifications.module.css';
+
+export const metadata: Metadata = {
+  title: 'Certifications',
+  description: 'A list of my formal certifications and technical achievements, including credentials from TESDA, IBM, and Cisco in AI, Docker, and computer systems.',
+};
 
 const allCertifications = [
   {
@@ -18,7 +23,7 @@ const allCertifications = [
     issuer: 'IBM',
     date: '2026',
     description: 'Introduction to Docker concepts, containers, and images for developers.',
-    image: '/certifications/IBM CO0101EN Certificate _ Cognitive Class.jpg',
+    image: '/certifications/docker-essentials.jpg',
   },
   {
     title: 'Introduction to Modern AI',
@@ -37,12 +42,6 @@ const allCertifications = [
 ];
 
 export default function CertificationsPage() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const openImage = (path: string) => {
-    setSelectedImage(encodeURI(path));
-  };
-
   return (
     <>
       <Header />
@@ -56,28 +55,8 @@ export default function CertificationsPage() {
                 <Link href="/" className={styles.backLink}>&lt; Back to Home</Link>
               </div>
             </div>
-            <div className={styles.grid}>
-              {allCertifications.map((cert, index) => (
-                <div 
-                  key={index} 
-                  className={styles.card}
-                  onClick={() => cert.image && openImage(cert.image)}
-                >
-                  <h3 className={styles.certTitle}>{cert.title}</h3>
-                  <p className={styles.issuer}>{cert.issuer}</p>
-                </div>
-              ))}
-            </div>
+            <CertificationsList certifications={allCertifications} />
           </div>
-
-          {selectedImage && (
-            <div className={styles.modalOverlay} onClick={() => setSelectedImage(null)}>
-              <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>&times;</button>
-                <img src={selectedImage} alt="Certification" className={styles.pdfViewer} />
-              </div>
-            </div>
-          )}
         </section>
       </main>
       <Footer />
