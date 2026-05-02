@@ -1,38 +1,33 @@
 'use client';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from 'react-icons/fa';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { Calendar } from 'lucide-react';
 import styles from './Contact.module.css';
 
+const MAX_MESSAGE_LENGTH = 25000;
+
 export default function Contact() {
-  const [result, setResult] = useState("");
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [result, setResult] = useState('');
 
-  const onSubmit = async (event: any) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setResult('Sending...');
     
-    if (!captchaToken) {
-      setResult("Please complete the captcha.");
-      return;
-    }
+    const formData = new FormData(event.currentTarget);
+    formData.append('access_key', '5d018e2e-cced-4c42-bab7-95d70810bd0a');
 
-    setResult("Sending....");
-    const formData = new FormData(event.target);
-    formData.append("access_key", "5d018e2e-cced-4c42-bab7-95d70810bd0a");
-    formData.append("h-captcha-response", captchaToken);
-
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData,
     });
 
     const data = await response.json();
+
     if (data.success) {
-      setResult("Form Submitted Successfully");
-      event.target.reset();
-      setCaptchaToken(null);
+      setResult('Form Submitted Successfully');
+      event.currentTarget.reset();
     } else {
-      setResult("Error: " + data.message);
+      setResult('Error: ' + (data.message || 'Submission failed.'));
     }
   };
 
@@ -64,12 +59,23 @@ export default function Contact() {
             <FaEnvelope size={18} />
             <span>Email</span>
           </a>
+          <a href="https://calendly.com/kennethosorio/consultation" target="_blank" rel="noopener" className={styles.socialItem}>
+            <Calendar size={18} />
+            <span>Schedule Call</span>
+          </a>
         </div>
 
         <form className={styles.form} onSubmit={onSubmit}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>Name</label>
-            <input type="text" name="name" id="name" required className={styles.input} placeholder="Your name" />
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              className={styles.input}
+              placeholder="Your name"
+            />
           </div>
 
           <div className={styles.formGroup}>
@@ -79,13 +85,14 @@ export default function Contact() {
 
           <div className={styles.formGroup}>
             <label htmlFor="message" className={styles.label}>Message</label>
-            <textarea name="message" id="message" required className={styles.textarea} placeholder="Tell me about your project..." rows={6} />
-          </div>
-
-          <div className={styles.formGroup}>
-            <HCaptcha
-              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-              onVerify={(token) => setCaptchaToken(token)}
+            <textarea
+              name="message"
+              id="message"
+              required
+              className={styles.textarea}
+              placeholder="Tell me about your project..."
+              rows={6}
+              maxLength={MAX_MESSAGE_LENGTH}
             />
           </div>
 

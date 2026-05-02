@@ -1,3 +1,6 @@
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
 import styles from './Certifications.module.css';
 
 const certifications = [
@@ -6,27 +9,56 @@ const certifications = [
     issuer: 'TESDA',
     date: '2023',
     description: 'National certification for hardware repair, network setup, and computer systems maintenance.',
+    image: '/certifications/CSSNCII.jpg',
   },
   {
-    title: 'Consistent President\'s Lister',
-    issuer: 'Polytechnic University of the Philippines',
-    date: '2023 — Present',
-    description: 'Maintained top academic standing every semester since freshman year.',
+    title: 'Docker Essentials: A Developer Introduction',
+    issuer: 'IBM',
+    date: '2026',
+    description: 'Introduction to Docker concepts, containers, and images for developers.',
+    image: '/certifications/IBM CO0101EN Certificate _ Cognitive Class.jpg',
+  },
+  {
+    title: 'Introduction to Modern AI',
+    issuer: 'Cisco',
+    date: '2026',
+    description: 'Foundational concepts of artificial intelligence and machine learning.',
+    image: '/certifications/IntrotoModernAIUpdate20260322-32-4508dv.jpg',
+  },
+  {
+    title: 'Create Digital Content, Communicate and Collaborate Online',
+    issuer: 'Cisco',
+    date: '2026',
+    description: 'Best practices for creating digital content and online collaboration.',
+    image: '/certifications/CreateDigitalContentUpdate20260321-31-m3s3e.jpg',
   },
 ];
 
 export default function Certifications() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const openImage = (path: string) => {
+    setSelectedImage(encodeURI(path));
+  };
+
   return (
     <section className={styles.certifications} id="certifications">
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Certifications & Awards</h2>
+          <div className={styles.headerTop}>
+            <h2 className={styles.title}>Certifications</h2>
+            <Link href="/certifications" className={styles.viewAll}>View All &gt;</Link>
+          </div>
           <p className={styles.subtitle}>Formal recognition of my technical skills and achievements.</p>
         </div>
 
         <div className={styles.list}>
-          {certifications.map((cert, index) => (
-            <div key={index} className={styles.card}>
+          {certifications.slice(0, 3).map((cert, index) => (
+            <div 
+              key={index} 
+              className={styles.card}
+              onClick={() => cert.image && openImage(cert.image)}
+            >
               <div className={styles.content}>
                 <h3 className={styles.certTitle}>{cert.title}</h3>
                 <div className={styles.meta}>
@@ -40,6 +72,15 @@ export default function Certifications() {
           ))}
         </div>
       </div>
+
+      {selectedImage && (
+        <div className={styles.modalOverlay} onClick={() => setSelectedImage(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>&times;</button>
+            <img src={selectedImage} alt="Certification" className={styles.pdfViewer} />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

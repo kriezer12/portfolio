@@ -8,7 +8,7 @@ const skills = [
   },
   {
     category: 'Backend & Cloud',
-    items: ['Python', 'FastAPI', 'Node.js', 'PostgreSQL', 'AWS', 'Kubernetes']
+    items: ['Python', 'FastAPI', 'Node.js', 'PostgreSQL', 'AWS']
   },
   {
     category: 'DevOps & Security',

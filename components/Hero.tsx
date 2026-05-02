@@ -1,8 +1,12 @@
+'use client';
+import { useState } from 'react';
 import Image from 'next/image';
-import { MapPin, GraduationCap, Mail, FolderGit2 } from 'lucide-react';
+import { MapPin, GraduationCap, Calendar, FolderGit2, FileText, Download, X } from 'lucide-react';
 import styles from './Hero.module.css';
 
 export default function Hero() {
+  const [showCV, setShowCV] = useState(false);
+
   return (
     <section className={styles.hero}>
       <div className={styles.container}>
@@ -34,19 +38,38 @@ export default function Hero() {
           </div>
           
           <div className={styles.actions}>
-            <a href="#contact" className={styles.actionLink}>
-              <Mail size={14} /> Contact Me
+            <a href="https://calendly.com/kennethosorio/consultation" target="_blank" rel="noopener noreferrer" className={styles.actionLink}>
+              <Calendar size={14} /> Schedule Call
             </a>
-            <span>•</span>
             <a href="#projects" className={styles.actionLink}>
               <FolderGit2 size={14} /> View my Projects
             </a>
+            <button onClick={() => setShowCV(true)} className={styles.actionLink} style={{background:'none', border:'none', cursor:'pointer', padding:0, font: 'inherit'}}>
+              <FileText size={14} /> View CV
+            </button>
           </div>
         </div>
       </div>
       <div className={styles.dividerContainer}>
         <hr className={styles.divider} />
       </div>
+
+      {showCV && (
+        <div className={styles.modalOverlay} onClick={() => setShowCV(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setShowCV(false)}><X size={24} /></button>
+            <div className={styles.modalActions}>
+                <a href="/cv/CV_Osorio,Kenneth.pdf" download className={styles.downloadButton}>
+                    <Download size={20} />
+                </a>
+            </div>
+            <div className={styles.cvViewerContainer} style={{ overflowY: 'auto', maxHeight: '80vh' }}>
+                <img src="/cv/CV_Osorio,Kenneth_page-0001.jpg" alt="CV Page 1" className={styles.pdfViewer} style={{ width: '100%', marginBottom: '10px' }} />
+                <img src="/cv/CV_Osorio,Kenneth_page-0002.jpg" alt="CV Page 2" className={styles.pdfViewer} style={{ width: '100%' }} />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
