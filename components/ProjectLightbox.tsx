@@ -32,16 +32,28 @@ export const ProjectLightbox = memo(({ project, onClose }: ProjectLightboxProps)
 
   useEffect(() => {
     if (!project?.media || project.media.length <= 1) return;
-    const interval = setInterval(() => {
-      const img = document.querySelector(`.${styles.lightboxImage}`);
-      img?.classList.add(styles.fadeOut);
-      
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % (project.media?.length || 1));
-        img?.classList.remove(styles.fadeOut);
-      }, 500); // Wait half of the 1s transition time
-    }, 4000);
-    return () => clearInterval(interval);
+
+    let frameId: number;
+    let lastTime = performance.now();
+    const duration = 4000;
+
+    const animate = (time: number) => {
+      if (time - lastTime >= duration) {
+        const img = document.querySelector(`.${styles.lightboxImage}`);
+        if (img) {
+          img.classList.add(styles.fadeOut);
+          setTimeout(() => {
+            setCurrentIndex((prev) => (prev + 1) % (project.media?.length || 1));
+            img.classList.remove(styles.fadeOut);
+          }, 500);
+        }
+        lastTime = time;
+      }
+      frameId = requestAnimationFrame(animate);
+    };
+
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
   }, [project]);
 
   // Close on backdrop click
