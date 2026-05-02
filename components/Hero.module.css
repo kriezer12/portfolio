@@ -31,6 +31,24 @@
   flex: 1;
 }
 
+.socials {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.socialLink {
+  color: var(--on-surface-variant);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.socialLink:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
 .name {
   font-size: 2.5rem;
   font-weight: 800;
@@ -60,9 +78,34 @@
 
 .actions {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 16px;
   font-size: 0.95rem;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.socialLink {
+  color: var(--on-surface-variant);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.socialLink:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
 }
 
 .actionLink {

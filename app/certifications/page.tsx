@@ -14,8 +14,8 @@ const allCertifications = [
   {
     title: 'Computer System Servicing NC II',
     issuer: 'TESDA',
-    date: '2023',
-    description: 'National certification for hardware repair, network setup, and computer systems maintenance.',
+    date: '2024 - 2029',
+    description: 'National certification for hardware repair, server management, network setup, and computer systems maintenance.',
     image: '/certifications/CSSNCII.jpg',
   },
   {

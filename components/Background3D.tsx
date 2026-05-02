@@ -140,9 +140,6 @@ export default function Background3D() {
       
       camera.lookAt(scene.position);
 
-      // Rotation and space travel
-      particles.rotation.y += 0.00003;
-
       const forwardSpeed = 0.5 + scrollVelocity;
       const positionsArray = geometry.attributes.position.array as Float32Array;
       for (let i = 0; i < particleCount; i++) {
