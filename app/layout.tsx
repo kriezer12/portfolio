@@ -3,6 +3,7 @@ import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import Background3D from '@/components/Background3D';
+import ChatBot from '@/components/ChatBot';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -63,6 +64,7 @@ export default function RootLayout({
         <Providers>
           <Background3D />
           {children}
+          <ChatBot />
         </Providers>
       </body>
     </html>
