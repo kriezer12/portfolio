@@ -1,5 +1,4 @@
 import styles from './Footer.module.css';
-import ThemeToggle from './ThemeToggle';
 
 export default function Footer() {
   return (
@@ -7,10 +6,7 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.copyright}>
-            <p>© 2026 Kenneth Osorio</p>
-          </div>
-          <div className={styles.toggleWrapper}>
-            <ThemeToggle />
+            <p>© 2026 Kenneth Osorio. All rights reserved.</p>
           </div>
         </div>
       </div>

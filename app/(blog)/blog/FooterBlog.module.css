@@ -1,25 +1,19 @@
 .footer {
-  padding: 40px 0 20px;
+  padding: 20px var(--gutter);
   width: 100%;
-  margin-top: auto;
+  margin-top: auto; /* Push to bottom of flex container */
+  background-color: transparent;
 }
 
 .container {
   max-width: 896px;
   margin: 0 auto;
-  padding: 0 var(--gutter);
-  border-top: 1px solid var(--outline-variant); /* Constrained length */
-  padding-top: 40px;
 }
 
 .content {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-}
-
-.copyright {
-  text-align: center;
 }
 
 .copyright p {
@@ -27,4 +21,10 @@
   font-size: 0.82rem;
   letter-spacing: 0.05em;
   margin: 0;
+}
+
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  transform: scale(0.85);
 }

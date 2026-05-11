@@ -1,6 +1,6 @@
 import { getAllPosts, formatDate, calculateReadTime } from '@/lib/blog';
 import Link from 'next/link';
-import Footer from '@/components/Footer';
+import FooterBlog from './FooterBlog';
 import styles from './Blog.module.css';
 
 export const metadata = {
@@ -60,7 +60,7 @@ export default function BlogListing() {
           )}
         </div>
       </main>
-      <Footer />
+      <FooterBlog />
     </>
   );
 }

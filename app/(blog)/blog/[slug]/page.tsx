@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import Footer from '@/components/Footer';
+import FooterBlog from '../FooterBlog';
 import ShareButtons from './ShareButtons';
 import styles from './Post.module.css';
 import { Metadata } from 'next';
@@ -91,7 +91,7 @@ export default async function BlogPost({ params }: Props) {
           </Link>
         </div>
       </article>
-      <Footer />
+      <FooterBlog />
     </>
   );
 }
