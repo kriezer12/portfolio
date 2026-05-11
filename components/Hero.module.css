@@ -221,5 +221,12 @@
   }
   .actions {
     justify-content: center;
+    align-items: center;
+  }
+  .socials {
+    justify-content: center;
+  }
+  .actionButtons {
+    justify-content: center;
   }
 }

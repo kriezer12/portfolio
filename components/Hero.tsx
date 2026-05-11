@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
-import { MapPin, GraduationCap, Calendar, FileText, Download, X } from 'lucide-react';
+import { MapPin, GraduationCap, Calendar, FileText, Download, X, BookOpen } from 'lucide-react';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import styles from './Hero.module.css';
 
@@ -57,6 +57,9 @@ export default function Hero() {
               <button onClick={() => setShowCV(true)} className={styles.actionLink} style={{background:'none', border:'none', cursor:'pointer', padding:0, fontFamily: 'inherit', fontSize: 'inherit', fontWeight: '600'}}>
                 <FileText size={14} /> View CV
               </button>
+              <a href="https://blog.kennethosorio.dev" className={styles.actionLink}>
+                <BookOpen size={14} /> Check my Blog
+              </a>
             </div>
           </div>
         </div>
