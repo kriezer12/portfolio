@@ -14,7 +14,12 @@ export default function BlogListing() {
   return (
     <>
       <main className={`${styles.container} flex-grow`}>
-        <h1 className={styles.title}>Ken&apos;s Blog</h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Ken&apos;s Blog</h1>
+          <Link href="/" className={styles.backLinkButton}>
+            &lt; View my portfolio
+          </Link>
+        </div>
         <p className={styles.caption}>
           A collection of my thoughts on technology, DevOps, cloud engineering, 
           and my various hobbies and interests.

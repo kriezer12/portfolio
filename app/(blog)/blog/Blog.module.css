@@ -4,11 +4,31 @@
   padding: 36px var(--gutter) 60px;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
 .title {
   font-family: var(--font-jetbrains-mono);
   font-size: 2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   color: var(--on-surface);
+}
+
+.backLinkButton {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 0.8rem;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.backLinkButton:hover {
+  color: var(--primary);
+  text-decoration: underline;
 }
 
 .caption {

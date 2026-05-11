@@ -29,21 +29,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  // Ensure description is at least 100 characters for LinkedIn preview
+  const description = post.description.length >= 100 
+    ? post.description 
+    : `${post.description} | A post by Kenneth Osorio about ${post.tags.join(', ')}. Read more on my personal blog to learn about technology, DevOps, and more.`;
+
   return {
     title: `${post.title} | Kenneth Osorio`,
-    description: post.description,
+    description: description,
     openGraph: {
       title: post.title,
-      description: post.description,
+      description: description,
+      siteName: 'Ken\'s Blog',
+      url: `https://blog.kennethosorio.dev/${post.slug}`,
       type: 'article',
       publishedTime: post.date,
       authors: ['Kenneth Osorio'],
-      url: `https://blog.kennethosorio.dev/${post.slug}`,
     },
     twitter: {
       card: 'summary',
       title: post.title,
-      description: post.description,
+      description: description,
     },
   };
 }
