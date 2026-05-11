@@ -14,7 +14,7 @@ export default function ShareButtons({ url }: ShareButtonsProps) {
 
   const shareToLinkedIn = () => {
     const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-    window.open(linkedInUrl, '_blank', 'width=600,height=400');
+    window.open(linkedInUrl, '_blank');
   };
 
   const copyToClipboard = () => {
