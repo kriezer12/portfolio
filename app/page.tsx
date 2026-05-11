@@ -35,7 +35,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Header />
-      <main>
+      <main className="flex-grow">
         <Hero />
         <About />
         <Expertise />
