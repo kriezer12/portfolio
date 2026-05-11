@@ -12,6 +12,13 @@ export const metadata: Metadata = {
 
 const allCertifications = [
   {
+    title: 'Visual Graphic Design NC III',
+    issuer: 'TESDA',
+    date: '2026 - 2031',
+    description: 'National certification covering design principles, layout, digital illustration, and photo editing.',
+    image: '/certifications/VGDNCIII.jpg',
+  },
+  {
     title: 'Computer System Servicing NC II',
     issuer: 'TESDA',
     date: '2024 - 2029',
