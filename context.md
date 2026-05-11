@@ -46,6 +46,8 @@ GitDigest - [Details available in the portfolio](https://v0-devdigest-web-app.ve
 
 Municipal HRM - [Details available in the portfolio.](https://municipal-hr-management-system.vercel.app/)
 
+Obsidian Blog - A personal blog integrated into the portfolio, powered by Obsidian and Next.js, hosted at [blog.kennethosorio.dev](https://blog.kennethosorio.dev).
+
 ## Certifications
 
 Computer System Servicing NC II from TESDA.

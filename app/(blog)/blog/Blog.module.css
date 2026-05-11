@@ -1,0 +1,106 @@
+.container {
+  max-width: 896px;
+  margin: 0 auto;
+  padding: 36px var(--gutter) 60px;
+}
+
+.title {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--on-surface);
+}
+
+.caption {
+  font-size: 1rem;
+  color: var(--on-surface-variant);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.postCard {
+  border-left: 2px solid var(--outline-variant);
+  padding-left: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none !important;
+  display: block;
+  opacity: 0.8;
+}
+
+.postCard:hover {
+  border-left-color: var(--primary);
+  opacity: 1;
+}
+
+/* Only these elements move on hover */
+.postCard:hover .postDate,
+.postCard:hover .postTitle,
+.postCard:hover .postDescription,
+.postCard:hover .postTags {
+  transform: translateX(4px);
+}
+
+.postCard:hover .postTitle {
+  color: var(--primary);
+}
+
+.postCard:hover .readMoreText {
+  color: #0070f3; /* Only the 'Read More' part turns blue */
+}
+
+.postDate {
+  font-size: 0.8rem;
+  color: var(--on-surface-variant);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-jetbrains-mono);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.postTitle {
+  font-size: 1.5rem;
+  color: var(--on-surface);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-jetbrains-mono);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.postDescription {
+  font-size: 1rem;
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.postTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.readMore {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 0.8rem;
+  color: var(--on-surface-variant);
+  margin-top: 1.25rem;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+.readMoreText {
+  transition: color 0.3s ease;
+}
+
+.tag {
+  font-size: 0.7rem;
+  color: var(--primary);
+  text-transform: uppercase;
+}
