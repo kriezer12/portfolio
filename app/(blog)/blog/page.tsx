@@ -5,7 +5,19 @@ import styles from './Blog.module.css';
 
 export const metadata = {
   title: 'Blog | Kenneth Osorio',
-  description: 'Technical thoughts, guides, and experiments by Kenneth Osorio.',
+  description: 'A collection of my thoughts on technology, DevOps, cloud engineering, and my various hobbies and interests.',
+  openGraph: {
+    title: 'Ken\'s Blog | Kenneth Osorio',
+    description: 'A collection of my thoughts on technology, DevOps, cloud engineering, and my various hobbies and interests.',
+    url: 'https://blog.kennethosorio.dev',
+    siteName: 'Ken\'s Blog',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Ken\'s Blog | Kenneth Osorio',
+    description: 'A collection of my thoughts on technology, DevOps, cloud engineering, and my various hobbies and interests.',
+  },
 };
 
 export default function BlogListing() {
