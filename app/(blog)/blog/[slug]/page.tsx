@@ -45,14 +45,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: post.date,
       authors: ['Kenneth Osorio'],
+      images: [
+        {
+          url: `https://blog.kennethosorio.dev/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description.substring(0, 100))}`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: post.title,
       description: description,
+      images: [`https://blog.kennethosorio.dev/api/og?title=${encodeURIComponent(post.title)}&description=${encodeURIComponent(post.description.substring(0, 100))}`],
     },
   };
-}
+  }
 
 export default async function BlogPost({ params }: Props) {
   const { slug } = await params;

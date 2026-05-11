@@ -36,6 +36,7 @@
     "@google/generative-ai": "^0.24.1",
     "@hcaptcha/react-hcaptcha": "^2.0.2",
     "@types/three": "^0.184.0",
+    "@vercel/og": "^0.11.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.11.0",
