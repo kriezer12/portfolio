@@ -136,8 +136,9 @@
   color: var(--on-surface);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   margin: auto;
-  overflow: hidden;
   max-height: 90vh;
+  display: flex;
+  flex-direction: column;
   animation: fadeIn 0.3s ease-out;
 }
 
@@ -151,6 +152,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px;
+  flex-shrink: 0;
 }
 
 .lightboxTitle {
@@ -168,10 +170,11 @@
 
 .lightboxImage {
   width: 100%;
-  height: 400px;
+  height: 300px;
   object-fit: contain;
   background: var(--surface-container-low);
   transition: opacity 1s ease-in-out;
+  flex-shrink: 0;
 }
 
 .fadeOut {
@@ -180,6 +183,7 @@
 
 .lightboxFooter {
   padding: 24px;
+  overflow-y: auto;
 }
 
 .link {
@@ -202,6 +206,19 @@
 }
 
 @media (max-width: 640px) {
+  .lightbox {
+    width: 95%;
+    max-height: 95vh;
+  }
+  .lightboxHeader {
+    padding: 16px;
+  }
+  .lightboxImage {
+    height: 200px;
+  }
+  .lightboxFooter {
+    padding: 16px;
+  }
   .cardHeader {
     flex-direction: column;
     align-items: flex-start;
