@@ -1,0 +1,144 @@
+.shareSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  margin: 3rem 0 1rem 0; /* Reduced bottom margin */
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--outline-variant);
+  border-bottom: none;
+}
+
+.shareBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-jetbrains-mono);
+  font-size: 0.8rem;
+  color: var(--on-surface-variant);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.shareBtn:hover {
+  color: var(--primary);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-jetbrains-mono);
+  font-size: 0.8rem;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.backLink:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.container {
+  max-width: 896px;
+  margin: 0 auto;
+  padding: 36px var(--gutter) 60px;
+}
+
+.header {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--outline-variant);
+  padding-bottom: 2rem;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: var(--on-surface-variant);
+  margin-bottom: 1rem;
+  font-family: var(--font-jetbrains-mono);
+}
+
+.title {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+  color: var(--on-surface);
+  line-height: 1.2;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tag {
+  color: var(--primary);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.content {
+  color: var(--on-surface);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.content h1, .content h2, .content h3 {
+  font-family: var(--font-jetbrains-mono);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--on-surface);
+}
+
+.content p {
+  margin-bottom: 1.5rem;
+}
+
+.content ul, .content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.content code {
+  background-color: var(--surface-container-high);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-jetbrains-mono);
+  font-size: 0.9em;
+}
+
+.content pre {
+  background-color: var(--surface-container-low);
+  padding: 1.5rem;
+  border: 1px solid var(--outline-variant);
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+.content pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.content blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1.5rem;
+  font-style: italic;
+  margin: 2rem 0;
+  color: var(--on-surface-variant);
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 2.2rem;
+  }
+}

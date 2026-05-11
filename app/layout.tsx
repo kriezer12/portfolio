@@ -1,7 +1,14 @@
 import type { Metadata } from 'next';
+import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/components/Providers';
 import Background3D from '@/components/Background3D';
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kennethosorio.dev'),
@@ -51,8 +58,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
+    <html lang="en" suppressHydrationWarning className={jetbrainsMono.variable}>
+      <body className="antialiased min-h-screen flex flex-col">
         <Providers>
           <Background3D />
           {children}
