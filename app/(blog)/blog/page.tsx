@@ -16,7 +16,7 @@ export default function BlogListing() {
       <main className={`${styles.container} flex-grow`}>
         <div className={styles.header}>
           <h1 className={styles.title}>Ken&apos;s Blog</h1>
-          <Link href="/" className={styles.backLinkButton}>
+          <Link href="https://kennethosorio.dev" className={styles.backLinkButton}>
             &lt; View my portfolio
           </Link>
         </div>

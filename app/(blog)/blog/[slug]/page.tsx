@@ -65,7 +65,7 @@ export default async function BlogPost({ params }: Props) {
   return (
     <>
       <article className={`${styles.container} flex-grow`}>
-        <Link href="/blog" className={styles.backLink}>
+        <Link href="/" className={styles.backLink}>
           &lt; All posts
         </Link>
         <header className={styles.header}>
@@ -86,7 +86,7 @@ export default async function BlogPost({ params }: Props) {
           url={`https://blog.kennethosorio.dev/${post.slug}`} 
         />
         <div style={{ marginTop: '1rem' }}>
-          <Link href="/blog" className={styles.backLink}>
+          <Link href="/" className={styles.backLink}>
             &lt; All posts
           </Link>
         </div>
