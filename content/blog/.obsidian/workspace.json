@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "template.md",
+                "file": "hello-world.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "template"
+              "title": "hello-world"
             }
           }
         ],
@@ -211,8 +211,10 @@
   },
   "active": "b0eb42bd4545c098",
   "lastOpenFiles": [
-    "hello-world.md",
+    "self-discipline.md",
+    "learning-agentic-development.md",
     "template.md",
+    "hello-world.md",
     "2026-05-11.md",
     "test.md",
     "Welcome.md"
