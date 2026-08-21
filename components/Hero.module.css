@@ -1,232 +1,214 @@
 .hero {
-  padding: 80px var(--gutter) 40px;
-}
-
-.container {
-  max-width: 896px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 48px;
-}
-
-.imageContainer {
-  flex-shrink: 0;
-}
-
-.profileFrame {
-  width: 200px;
-  height: 200px;
-  border-radius: 12px;
-  overflow: hidden;
   position: relative;
-  border: 4px solid var(--surface-container-high);
-}
-
-.profileImage {
-  object-fit: cover;
-}
-
-.content {
-  flex: 1;
-}
-
-.socials {
+  min-height: calc(100vh - 56px);
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--section-gap) clamp(var(--margin), 5vw, 64px) calc(var(--section-gap) * 2);
 }
 
-.socialLink {
-  color: var(--on-surface-variant);
-  transition: color 0.2s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
+.kicker {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--outline);
+  margin-bottom: var(--margin);
 }
 
-.socialLink:hover {
+.kicker::before {
+  content: '$ ';
   color: var(--primary);
-  transform: translateY(-2px);
 }
 
 .name {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 8px;
+  font-size: clamp(3rem, 11vw, 7.25rem);
+  line-height: 0.95;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--margin);
 }
 
-.role {
-  font-size: 1.25rem;
+.nameLine {
+  display: block;
+}
+
+.nameFilled {
+  color: var(--on-surface);
+}
+
+.nameOutline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--on-surface);
+}
+
+.nameDot {
+  color: var(--primary);
+  -webkit-text-stroke: 0;
+}
+
+.dotReveal {
+  animation: dot-in 400ms ease-out 900ms both;
+}
+
+@keyframes dot-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.roleLine {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 32px;
+  font-size: 1rem;
   color: var(--on-surface-variant);
-  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.prompt {
+  color: var(--primary);
+}
+
+.roleWord {
+  min-width: 9ch;
+  font-weight: 500;
+  color: var(--on-surface);
+}
+
+.cursor {
+  display: inline-block;
+  width: 9px;
+  height: 1.15em;
+  background: var(--primary);
+  animation: cursor-blink 1.1s steps(1) infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .meta {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.metaItemInline {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--on-surface-variant);
-  font-size: 0.95rem;
+  margin-top: var(--gutter);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--outline);
 }
 
 .actions {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  font-size: 0.95rem;
+  gap: var(--gutter);
+  margin-top: calc(var(--margin) + 8px);
+  flex-wrap: wrap;
 }
 
-.actionButtons {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  align-items: center;
-}
-
-.socials {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-
-.socialLink {
-  color: var(--on-surface-variant);
-  transition: color 0.2s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-}
-
-.socialLink:hover {
-  color: var(--primary);
-  transform: translateY(-2px);
-}
-
-.actionLink {
-  display: flex;
+.action {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+  border: var(--rule);
+  border-color: var(--primary);
   color: var(--primary);
+  background: transparent;
   text-decoration: none;
-  font-weight: 600;
-  transition: opacity 0.2s ease;
+  font-family: inherit;
+  font-size: 0.82rem;
+  padding: 10px 16px;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
 }
 
-.actionLink:hover {
-  opacity: 0.7;
+.action:hover,
+.action:focus-visible {
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
-.dividerContainer {
-  margin-top: 48px;
+.scrollCue {
+  position: absolute;
+  bottom: 24px;
+  left: clamp(var(--margin), 5vw, 64px);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--outline);
+  text-decoration: none;
 }
 
-.divider {
-  border: 0;
-  border-top: 1px solid var(--outline-variant);
+.scrollCue:hover,
+.scrollCue:focus-visible {
+  color: var(--on-surface-variant);
 }
 
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  padding: 20px;
-  animation: fadeIn 0.3s ease;
-}
-
-.modalContent {
-  width: 100%;
-  max-width: 800px;
-  height: auto;
-  background: white;
-  border-radius: 12px;
+/* Marquee strip */
+.marquee {
+  border-top: var(--rule);
+  border-bottom: var(--rule);
   overflow: hidden;
-  position: relative;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-  animation: scaleUp 0.3s ease;
+  padding: 12px 0;
 }
 
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: white;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #333;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.marqueeTrack {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1001;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
 }
 
-.pdfViewer {
-  width: 100%;
-  max-height: 80vh;
-  object-fit: contain;
-  display: block;
+.marquee:hover .marqueeTrack {
+  animation-play-state: paused;
 }
 
-.modalActions {
-  position: absolute;
-  top: 10px;
-  right: 60px;
-  z-index: 1001;
-}
-
-.downloadButton {
-  background: white;
-  padding: 8px;
-  border-radius: 50%;
-  color: #333;
+.marqueeGroup {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--outline);
+  white-space: nowrap;
 }
 
-@keyframes scaleUp {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.marqueeDot {
+  color: var(--primary);
+  margin: 0 22px;
 }
 
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    text-align: center;
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
   }
-  .meta {
-    align-items: center;
+  to {
+    transform: translateX(-50%);
   }
-  .actions {
-    justify-content: center;
-    align-items: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dotReveal {
+    animation: none;
+    opacity: 1;
   }
-  .socials {
-    justify-content: center;
+  .cursor {
+    animation: none;
   }
-  .actionButtons {
-    justify-content: center;
+  .marqueeTrack {
+    animation: none;
+  }
+  .scrollCue span {
+    display: inline;
   }
 }

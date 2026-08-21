@@ -1,103 +1,86 @@
 'use client';
-import { useState } from 'react';
-import Image from 'next/image';
-import { MapPin, GraduationCap, Calendar, FileText, Download, X, BookOpen } from 'lucide-react';
-import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FileText, Calendar } from 'lucide-react';
+import SplitText from '@/components/reactbits/SplitText';
+import RotatingText from '@/components/reactbits/RotatingText';
 import styles from './Hero.module.css';
 
+const MARQUEE_ITEMS = [
+  'fullstack',
+  'devops',
+  'cloud',
+  'ai',
+  'automation',
+  'networking',
+  'open source',
+];
+
 export default function Hero() {
-  const [showCV, setShowCV] = useState(false);
-
   return (
-    <section className={styles.hero}>
-      <div className={styles.container}>
-        <div className={styles.imageContainer}>
-          <div className={styles.profileFrame}>
-            <Image 
-              src="/profile.jpg" 
-              alt="Kenneth P. Osorio" 
-              fill
-              priority
-              className={styles.profileImage}
-            />
-          </div>
+    <>
+      <section className={styles.hero} aria-label="Introduction">
+        <p className={styles.kicker}>~/kenneth-osorio — portfolio_v2</p>
+
+        <h1 className={styles.name}>
+          <SplitText
+            text="KENNETH"
+            as="span"
+            className={`${styles.nameLine} ${styles.nameFilled}`}
+          />
+          <SplitText
+            text="OSORIO"
+            as="span"
+            className={`${styles.nameLine} ${styles.nameOutline}`}
+            delayS={0.24}
+          />
+          <span className={`${styles.nameDot} ${styles.dotReveal}`}>.</span>
+        </h1>
+
+        <div className={styles.roleLine}>
+          <span className={styles.prompt} aria-hidden="true">
+            &gt;
+          </span>
+          <RotatingText
+            className={styles.roleWord}
+            words={['AI / SWE', 'DEVOPS', 'CLOUD']}
+          />
+          <span className={styles.cursor} aria-hidden="true" />
         </div>
 
-        <div className={styles.content}>
-          <h1 className={styles.name}>Kenneth P. Osorio</h1>
-          <h2 className={styles.role}>AI / Software Engineering / DevOps / Cloud</h2>
+        <p className={styles.meta}>cavite, ph — 14.48°N 120.98°E — open to work</p>
 
-          <div className={styles.meta}>
-            <div className={styles.metaItemInline}>
-              <MapPin size={14} className={styles.icon} />
-              <span>Cavite, Philippines</span>
-            </div>
-            <div className={styles.metaItemInline}>
-              <GraduationCap size={14} className={styles.icon} />
-              <span>Polytechnic University of the Philippines</span>
-            </div>
-          </div>
+        <div className={styles.actions}>
+          <a className={styles.action} href="/cv/CV_Osorio,Kenneth.pdf" download>
+            <FileText size={14} aria-hidden="true" /> [download_cv]
+          </a>
+          <a
+            className={styles.action}
+            href="https://calendly.com/kennethosorio/consultation"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Calendar size={14} aria-hidden="true" /> [schedule_call]
+          </a>
+        </div>
 
-          <div className={styles.actions}>
-            <div className={styles.socials}>
-              <a href="https://linkedin.com/in/kenneth-osorio-4b0a042b1" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="LinkedIn">
-                <FaLinkedin size={20} />
-              </a>
-              <a href="https://github.com/kriezer12" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="GitHub">
-                <FaGithub size={20} />
-              </a>
-              <a href="https://www.instagram.com/thirsty_samurai/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
-                <FaInstagram size={20} />
-              </a>
+        <a href="#about" className={styles.scrollCue}>
+          scroll <span aria-hidden="true">↓</span>
+        </a>
+      </section>
+
+      <div className={styles.marquee} aria-hidden="true">
+        <div className={styles.marqueeTrack}>
+          {[0, 1].map((copy) => (
+            <div className={styles.marqueeGroup} key={copy}>
+              {MARQUEE_ITEMS.map((item) => (
+                <span className={styles.marqueeItem} key={`${copy}-${item}`}>
+                  {item}
+                  <span className={styles.marqueeDot}>·</span>
+                </span>
+              ))}
             </div>
-            <div className={styles.actionButtons}>
-              <a href="https://calendly.com/kennethosorio/consultation" target="_blank" rel="noopener noreferrer" className={styles.actionLink}>
-                <Calendar size={14} /> Schedule Call
-              </a>
-              <button onClick={() => setShowCV(true)} className={styles.actionLink} style={{background:'none', border:'none', cursor:'pointer', padding:0, fontFamily: 'inherit', fontSize: 'inherit', fontWeight: '600'}}>
-                <FileText size={14} /> View CV
-              </button>
-              <a href="https://blog.kennethosorio.dev" className={styles.actionLink}>
-                <BookOpen size={14} /> Check my Blog
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-      <div className={styles.dividerContainer}>
-        <hr className={styles.divider} />
-      </div>
-
-      {showCV && (
-        <div className={styles.modalOverlay} onClick={() => setShowCV(false)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={() => setShowCV(false)}><X size={24} /></button>
-            <div className={styles.modalActions}>
-                <a href="/cv/CV_Osorio,Kenneth.pdf" download className={styles.downloadButton}>
-                    <Download size={20} />
-                </a>
-            </div>
-            <div className={styles.cvViewerContainer} style={{ overflowY: 'auto', maxHeight: '80vh' }}>
-                <div style={{ position: 'relative', width: '100%', height: '1100px', marginBottom: '10px' }}>
-                  <Image 
-                    src="/cv/CV_Osorio,Kenneth_page-0001.jpg" 
-                    alt="Kenneth Osorio Curriculum Vitae Page 1" 
-                    fill 
-                    style={{ objectFit: 'contain' }}
-                  />
-                </div>
-                <div style={{ position: 'relative', width: '100%', height: '1100px' }}>
-                  <Image 
-                    src="/cv/CV_Osorio,Kenneth_page-0002.jpg" 
-                    alt="Kenneth Osorio Curriculum Vitae Page 2" 
-                    fill 
-                    style={{ objectFit: 'contain' }}
-                  />
-                </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
+    </>
   );
 }
