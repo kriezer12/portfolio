@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
+import PaletteMount from '@/components/palette/PaletteMount';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -59,6 +60,7 @@ export default function RootLayout({
     <html lang="en" className={jetbrainsMono.variable}>
       <body className="antialiased min-h-screen flex flex-col">
         {children}
+        <PaletteMount />
       </body>
     </html>
   );
