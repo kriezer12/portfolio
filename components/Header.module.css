@@ -101,6 +101,25 @@
   color: var(--on-surface-variant);
 }
 
+.paletteIcon {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .paletteHint {
+    display: inline-flex;
+    padding: 7px;
+  }
+  .paletteKey,
+  .paletteHintText {
+    display: none;
+  }
+  .paletteIcon {
+    display: block;
+    color: var(--on-surface);
+  }
+}
+
 .menuToggle {
   display: none;
   background: none;
@@ -194,8 +213,7 @@
 }
 
 @media (max-width: 900px) {
-  .nav,
-  .paletteHint {
+  .nav {
     display: none;
   }
   .menuToggle {

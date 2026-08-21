@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import styles from './Header.module.css';
 
 const NAV_ITEMS = [
@@ -68,9 +68,10 @@ export default function Header() {
         </nav>
 
         <div className={styles.controls}>
-          <button type="button" className={styles.paletteHint} onClick={openPalette}>
+          <button type="button" className={styles.paletteHint} onClick={openPalette} aria-label="Open quick search">
             <span className={styles.paletteKey}>CTRL</span>
             <span className={styles.paletteKey}>K</span>
+            <Search size={15} className={styles.paletteIcon} aria-hidden="true" />
             <span className={styles.paletteHintText}>navigate</span>
           </button>
           <button
