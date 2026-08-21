@@ -1,30 +1,66 @@
 .footer {
-  padding: 40px 0 20px;
-  width: 100%;
-  margin-top: auto;
+  border-top: var(--rule);
 }
 
-.container {
-  max-width: 896px;
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  border-top: 1px solid var(--outline-variant); /* Constrained length */
-  padding-top: 40px;
-}
-
-.content {
+.inner {
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: var(--gutter);
+  flex-wrap: wrap;
+  padding: var(--gutter) clamp(var(--margin), 5vw, 64px);
 }
 
-.copyright {
-  text-align: center;
-}
-
-.copyright p {
-  color: var(--on-surface-variant);
-  font-size: 0.82rem;
-  letter-spacing: 0.05em;
+.item {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--outline);
   margin: 0;
+}
+
+.clockLabel {
+  color: var(--primary);
+  margin-right: 4px;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter);
+  margin-left: auto;
+}
+
+.socialLink {
+  color: var(--on-surface-variant);
+  transition: color 150ms ease-in-out;
+}
+
+.socialLink:hover,
+.socialLink:focus-visible {
+  color: var(--primary);
+  outline: none;
+}
+
+.topButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: var(--rule);
+  color: var(--on-surface-variant);
+  font-family: inherit;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.topButton:hover,
+.topButton:focus-visible {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+  outline: none;
 }
