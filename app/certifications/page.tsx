@@ -46,6 +46,13 @@ const allCertifications = [
     description: 'Best practices for creating digital content and online collaboration.',
     image: '/certifications/CreateDigitalContentUpdate20260321-31-m3s3e.jpg',
   },
+  {
+    title: 'CCNA - Cisco Certified Network Associate',
+    issuer: 'Cisco',
+    date: 'in progress',
+    description: 'Currently studying: networking fundamentals, IP connectivity and services, security fundamentals, and automation.',
+    image: '',
+  },
 ];
 
 export default function CertificationsPage() {
@@ -54,19 +61,25 @@ export default function CertificationsPage() {
       <Header />
       <main className={styles.main}>
         <section className={styles.page}>
-          <div className={styles.container}>
-            <div className={styles.header}>
-              <div className={styles.headerTop}>
-                <h1 className={styles.title}>Certifications</h1>
-                <div style={{ flex: 1 }}></div>
-                <Link href="/" className={styles.backLink}>&lt; Back to Home</Link>
-              </div>
-            </div>
-            <CertificationsList certifications={allCertifications} />
+          <div className={styles.pageHead}>
+            <span className={styles.pageIndex}>06</span>
+            <h1 className={styles.title}>Certifications</h1>
+            <Link href="/" className={styles.backLink}>
+              [<Back />back_home]
+            </Link>
           </div>
+          <CertificationsList certifications={allCertifications} />
         </section>
       </main>
       <Footer />
     </>
+  );
+}
+
+function Back() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true" style={{ display: 'inline', verticalAlign: '-1px' }}>
+      <path d="M19 12H5m0 0l6 6m-6-6l6-6" />
+    </svg>
   );
 }
