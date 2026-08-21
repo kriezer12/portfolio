@@ -1,3 +1,4 @@
+import SectionHeader from './SectionHeader';
 import styles from './Experience.module.css';
 
 const experiences = [
@@ -5,61 +6,69 @@ const experiences = [
     company: 'FG Aesthetic Centre',
     role: 'Full Stack Engineer Intern',
     period: 'Mar 2026 — May 2026',
-    description: 'Lead a five-person team to engineer a full-stack NFC loyalty platform for the salon industry, resolving deployment inconsistencies and slow delivery cycles by implementing Dockerized CI/CD pipelines and a structured Scrum cadence, which successfully accelerated feature rollouts and reduced support escalations through a stabilized, role-based production environment.',
-    tags: ['Software Infrastructure', 'Project Management', 'DevOps', 'Scrum', 'Agile Leadership', 'Mentoring', 'Onboarding'],
+    year: '2026',
+    description:
+      'Led a five-person team engineering a full-stack NFC loyalty platform for the salon industry — Dockerized CI/CD pipelines and structured Scrum cadence accelerated feature rollouts and reduced support escalations.',
+    tags: ['DevOps', 'Scrum', 'Agile Leadership', 'Mentoring'],
   },
   {
     company: 'Condor POS Solutions RP Inc.',
     role: 'Information Technology Intern',
     period: 'Jul 2025 — Aug 2025',
-    description: 'Assisted in the deployment and configuration of Point-of-Sale (POS) systems. Performed routine IT support, maintenance, and hardware repair. Conducted SQL data manipulation to support system functionality.',
-    tags: ['POS Systems', 'IT Support', 'SQL', 'Hardware Repair'],
+    year: '2025',
+    description:
+      'Deployed and configured Point-of-Sale systems, performed IT support and hardware repair, and ran SQL data manipulation to support system functionality.',
+    tags: ['POS Systems', 'IT Support', 'SQL'],
   },
   {
     company: 'Google Developer Student Clubs - PUP',
     role: 'Curriculum Analyst (Cloud Solutions)',
     period: 'Dec 2024 — Aug 2025',
-    description: 'Researched and curated cloud computing topics (GCP fundamentals, cloud security, serverless). Co-facilitated monthly "Cloud Study Jams" for 50+ participants and structured learning paths via Google Cloud Skills Boost.',
-    tags: ['GCP', 'Cloud Security', 'Curriculum Design', 'Public Speaking'],
+    year: '2024',
+    description:
+      'Researched cloud computing topics (GCP fundamentals, security, serverless); co-facilitated monthly Cloud Study Jams for 50+ participants via Google Cloud Skills Boost.',
+    tags: ['GCP', 'Cloud Security', 'Curriculum Design'],
   },
   {
     company: 'Polytechnic University of the Philippines',
     role: 'Diploma in Information Technology',
     period: 'Oct 2023 — Present',
-    description: 'Focusing on advanced IT concepts, software development, and systems analysis. Consistently maintaining academic excellence as a President\'s Lister.',
-    tags: ['Academic', 'Software Engineering', 'Systems Analysis'],
+    year: '2023',
+    description:
+      'Advanced IT concepts, software development, and systems analysis. Consistent President\'s Lister for academic excellence.',
+    tags: ['Academic', 'Systems Analysis'],
   },
 ];
 
 export default function Experience() {
   return (
     <section className={styles.experience} id="experience">
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Professional Journey</h2>
-          <p className={styles.subtitle}>A timeline of my professional experience, internships, and education.</p>
-        </div>
+      <SectionHeader index="02" title="Experience" />
 
-        <div className={styles.timeline}>
-          {experiences.map((exp, index) => (
-            <div key={index} className={styles.item}>
-              <div className={styles.dot} />
-              <div className={styles.content}>
-                <div className={styles.top}>
-                  <h3 className={styles.role}>{exp.role}</h3>
-                  <span className={styles.period}>{exp.period}</span>
-                </div>
-                <h4 className={styles.company}>{exp.company}</h4>
-                <p className={styles.description}>{exp.description}</p>
-                <div className={styles.tags}>
-                  {exp.tags.map((tag) => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
-                  ))}
-                </div>
+      <div className={styles.ledger}>
+        {experiences.map((exp) => (
+          <article key={`${exp.company}-${exp.period}`} className={styles.row} tabIndex={0}>
+            <span className={styles.year} aria-hidden="true">
+              {exp.year}
+            </span>
+            <div className={styles.main}>
+              <div className={styles.head}>
+                <h3 className={styles.role}>{exp.role}</h3>
+                <span className={styles.org}>{exp.company}</span>
+                <span className={styles.period}>{exp.period}</span>
               </div>
+              <p className={styles.description}>{exp.description}</p>
+              <p className={styles.tags}>
+                {exp.tags.map((tag, i) => (
+                  <span key={tag}>
+                    {i > 0 && <span className={styles.tagDot}> · </span>}
+                    {tag}
+                  </span>
+                ))}
+              </p>
             </div>
-          ))}
-        </div>
+          </article>
+        ))}
       </div>
     </section>
   );
