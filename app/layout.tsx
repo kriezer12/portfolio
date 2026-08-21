@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-import Background3D from '@/components/Background3D';
-import ChatBot from '@/components/ChatBot';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -60,9 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={jetbrainsMono.variable}>
       <body className="antialiased min-h-screen flex flex-col">
-        <Background3D />
         {children}
-        <ChatBot />
       </body>
     </html>
   );
