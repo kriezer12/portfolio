@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gutter);
+  margin-bottom: calc(var(--section-gap) / 2);
+}
+
+.index {
+  font-size: 0.75rem;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+}
+
+.title {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--on-surface);
+}
+
+.rule {
+  flex: 1;
+  height: 1px;
+  background: var(--outline-variant);
+}
