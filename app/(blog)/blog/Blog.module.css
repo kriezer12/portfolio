@@ -1,126 +1,142 @@
 .container {
   max-width: 896px;
   margin: 0 auto;
-  padding: 36px var(--gutter) 60px;
+  padding: 56px var(--gutter) 60px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 0.5rem;
+  gap: var(--gutter);
+  padding-bottom: var(--gutter);
+  border-bottom: var(--rule);
+  margin-bottom: var(--margin);
 }
 
 .title {
   font-family: var(--font-jetbrains-mono);
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   margin-bottom: 0;
   color: var(--on-surface);
 }
 
 .backLinkButton {
   font-family: var(--font-jetbrains-mono);
-  font-size: 0.8rem;
-  color: var(--on-surface-variant);
+  font-size: 0.78rem;
+  color: var(--primary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+  white-space: nowrap;
 }
 
 .backLinkButton:hover {
-  color: var(--primary);
-  text-decoration: underline;
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 .caption {
-  font-size: 1rem;
-  color: var(--on-surface-variant);
-  margin-bottom: 3rem;
-  line-height: 1.6;
-  max-width: 600px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--outline);
+  margin: var(--margin) 0 calc(var(--section-gap) / 1.5);
 }
 
 .postList {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  border-top: var(--rule);
 }
 
 .postCard {
-  border-left: 2px solid var(--outline-variant);
-  padding-left: 1.5rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: var(--gutter);
+  padding: 22px 8px;
+  border-bottom: var(--rule);
   text-decoration: none !important;
-  display: block;
-  opacity: 0.8;
+  color: var(--on-surface);
+  transition: background-color 130ms ease-in-out, color 130ms ease-in-out;
 }
 
-.postCard:hover {
-  border-left-color: var(--primary);
-  opacity: 1;
+.postCard:hover,
+.postCard:focus-visible {
+  background: var(--primary);
+  color: var(--on-primary);
+  outline: none;
 }
 
-/* Only these elements move on hover */
 .postCard:hover .postDate,
-.postCard:hover .postTitle,
 .postCard:hover .postDescription,
-.postCard:hover .postTags {
-  transform: translateX(4px);
-}
-
-.postCard:hover .postTitle {
-  color: var(--primary);
-}
-
-.postCard:hover .readMoreText {
-  color: #0070f3; /* Only the 'Read More' part turns blue */
+.postCard:hover .postTags,
+.postCard:hover .readMore,
+.postCard:focus-visible .postDate,
+.postCard:focus-visible .postDescription,
+.postCard:focus-visible .postTags,
+.postCard:focus-visible .readMore {
+  transform: none;
+  color: var(--on-primary);
 }
 
 .postDate {
-  font-size: 0.8rem;
-  color: var(--on-surface-variant);
-  margin-bottom: 0.5rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--outline);
+  padding-top: 4px;
   font-family: var(--font-jetbrains-mono);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .postTitle {
-  font-size: 1.5rem;
-  color: var(--on-surface);
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: inherit;
   margin-bottom: 0.5rem;
   font-family: var(--font-jetbrains-mono);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .postDescription {
-  font-size: 1rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
   color: var(--on-surface-variant);
-  line-height: 1.6;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 62ch;
 }
 
 .postTags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1rem;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 0.75rem;
 }
 
 .readMore {
   font-family: var(--font-jetbrains-mono);
-  font-size: 0.8rem;
-  color: var(--on-surface-variant);
-  margin-top: 1.25rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  color: var(--outline);
+  margin-top: 0.75rem;
   text-transform: lowercase;
 }
 
 .readMoreText {
-  transition: color 0.3s ease;
+  color: inherit;
 }
 
 .tag {
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   color: var(--primary);
   text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .postCard,
+  .backLinkButton,
+  .readMoreText {
+    transition: none;
+  }
 }
