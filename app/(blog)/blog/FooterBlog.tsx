@@ -1,5 +1,4 @@
 import styles from './FooterBlog.module.css';
-import ThemeToggle from '../../../components/ThemeToggle';
 
 export default function FooterBlog() {
   return (
@@ -8,9 +7,6 @@ export default function FooterBlog() {
         <div className={styles.content}>
           <div className={styles.copyright}>
             <p>© 2026 Kenneth Osorio</p>
-          </div>
-          <div className={styles.toggleWrapper}>
-            <ThemeToggle />
           </div>
         </div>
       </div>

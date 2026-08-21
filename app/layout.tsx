@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-import { Providers } from '@/components/Providers';
 import Background3D from '@/components/Background3D';
 import ChatBot from '@/components/ChatBot';
 
@@ -59,13 +58,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={jetbrainsMono.variable}>
+    <html lang="en" className={jetbrainsMono.variable}>
       <body className="antialiased min-h-screen flex flex-col">
-        <Providers>
-          <Background3D />
-          {children}
-          <ChatBot />
-        </Providers>
+        <Background3D />
+        {children}
+        <ChatBot />
       </body>
     </html>
   );
