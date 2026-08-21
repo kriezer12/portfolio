@@ -21,8 +21,8 @@ export default function Home() {
       addressCountry: 'Philippines'
     },
     sameAs: [
-      'https://linkedin.com/in/kenneth-osorio/', // Update with actual URL
-      'https://github.com/kriezer12',      // Update with actual URL
+      'https://linkedin.com/in/kenneth-osorio-4b0a042b1/',
+      'https://github.com/kriezer12',
     ],
     knowsAbout: ['AI', 'Software Engineering', 'DevOps', 'Cloud', 'Next.js', 'React', 'Python', 'AWS']
   };

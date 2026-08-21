@@ -83,3 +83,14 @@
   color: var(--on-primary);
   outline: none;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .row,
+  .rowArrow {
+    transition: none;
+  }
+  .row:hover .rowArrow,
+  .row:focus-visible .rowArrow {
+    transform: none;
+  }
+}
