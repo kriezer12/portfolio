@@ -17,6 +17,7 @@
   grid-template-columns: repeat(12, 1fr);
   gap: 24px;
   row-gap: 64px;
+  min-width: 0;
 }
 
 .capGroup {
@@ -61,6 +62,7 @@
   transition:
     padding-left 0.3s var(--ease),
     color 0.3s;
+  min-width: 0;
 }
 
 .capItems li:hover {

@@ -23,6 +23,7 @@
   margin: 0 auto;
   font-family: var(--font-body);
   font-size: 15px;
+  min-width: 0;
 }
 
 .mask {
@@ -52,6 +53,7 @@
   align-items: center;
   gap: 16px;
   will-change: transform;
+  min-width: 0;
 }
 
 .dash {
@@ -69,6 +71,7 @@
   line-height: 0.92;
   letter-spacing: -0.03em;
   text-transform: uppercase;
+  max-width: 100%;
 }
 
 .indent {
@@ -97,6 +100,7 @@
   margin-top: clamp(28px, 4vh, 56px);
   padding-top: 22px;
   border-top: 1px solid var(--rule-strong);
+  min-width: 0;
 }
 
 .role {
@@ -117,6 +121,7 @@
   max-width: 34ch;
   margin: 12px 0 0;
   color: rgba(20, 20, 19, 0.68);
+  overflow-wrap: anywhere;
 }
 
 .scrollCue {
@@ -177,4 +182,44 @@
 .secCornerTr {
   left: auto;
   right: calc(var(--gutter) * -1 + 24px);
+}
+
+@media (max-width: 520px) {
+  .hero {
+    min-height: 92svh;
+    padding-bottom: 32px;
+  }
+
+  .kicker {
+    gap: 10px;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+  }
+
+  .kicker .kickerInner {
+    gap: 10px;
+    white-space: normal;
+  }
+
+  .dash {
+    width: 28px;
+    flex: none;
+  }
+
+  .name {
+    font-size: clamp(52px, 18vw, 90px);
+  }
+
+  .indent {
+    padding-left: clamp(24px, 8vw, 64px);
+  }
+
+  .foot {
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .scrollCue {
+    display: none;
+  }
 }

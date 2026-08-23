@@ -11,8 +11,10 @@
 html,
 body {
   width: 100%;
+  min-width: 0;
   height: 100%;
   scroll-behavior: smooth;
+  overflow-x: clip;
   /* Modern Scrollbar */
   scrollbar-width: thin;
   scrollbar-color: var(--outline-variant) var(--background);
@@ -89,6 +91,8 @@ body {
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
   --rule: rgba(20, 20, 19, 0.12);
   --gutter: clamp(20px, 4vw, 64px);
+  min-width: 0;
+  overflow-x: clip;
 }
 
 body {
@@ -100,6 +104,32 @@ body {
   font-weight: 400;
   background-attachment: fixed;
   position: relative;
+}
+
+body > * {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+#top {
+  width: 100%;
+  min-width: 0;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.has-cursor,
+  body.has-cursor a,
+  body.has-cursor button {
+    cursor: none;
+  }
 }
 
 h1 {

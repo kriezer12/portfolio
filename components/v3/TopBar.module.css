@@ -10,6 +10,7 @@
   align-items: center;
   padding: 18px var(--gutter, 24px);
   mix-blend-mode: normal;
+  min-width: 0;
 }
 
 .brand {
@@ -72,6 +73,7 @@
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  max-width: 50%;
 }
 
 .clock {
@@ -104,6 +106,21 @@
 @media (max-width: 900px) {
   .navLinks {
     display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .topbar {
+    padding: 14px var(--gutter);
+  }
+
+  .brand {
+    font-size: 15px;
+  }
+
+  .navMeta {
+    font-size: 9px;
+    letter-spacing: 0.04em;
   }
 }
 
