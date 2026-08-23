@@ -1,0 +1,79 @@
+.section {
+  padding: clamp(80px, 10vw, 160px) var(--gutter);
+  border-top: 1px solid var(--rule);
+  max-width: 1680px;
+  margin: 0 auto;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.xpList {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.xpRow {
+  display: grid;
+  grid-template-columns: minmax(90px, 140px) minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: baseline;
+  padding: clamp(20px, 2.6vw, 32px) clamp(8px, 1vw, 20px);
+  border-bottom: 1px solid var(--rule-strong);
+  transition:
+    background-color 0.3s,
+    padding-left 0.3s var(--ease);
+}
+
+.xpRow:hover {
+  background: rgba(20, 20, 19, 0.04);
+  padding-left: clamp(18px, 2vw, 34px);
+}
+
+.xpYear {
+  color: var(--vermilion);
+}
+
+.xpRole {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(18px, 2vw, 26px);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.xpOrg {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(20, 20, 19, 0.66);
+}
+
+.xpTag {
+  color: rgba(20, 20, 19, 0.45);
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .xpRow {
+    grid-template-columns: 70px minmax(0, 1fr);
+  }
+
+  .xpOrg {
+    grid-column: 2;
+  }
+
+  .xpTag {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xpRow {
+    transition: none;
+  }
+}
