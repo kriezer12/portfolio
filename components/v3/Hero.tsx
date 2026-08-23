@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import DotField from './DotField';
-import { profile } from '@/content/v3';
+import { heroKickerSuffix, profile } from '@/content/v3';
 import styles from './Hero.module.css';
 
 const [firstName, lastName] = profile.name.split(' ');
@@ -82,7 +82,7 @@ export default function Hero() {
         <div className={`${styles.mask} ${styles.kicker}`}>
           <span ref={kickerInnerRef} className={styles.kickerInner}>
             <span className={styles.dash} />
-            {profile.location} &mdash; Est. folio, third edition
+            {profile.location} &mdash; {heroKickerSuffix}
           </span>
         </div>
         <h1 ref={nameRef} className={styles.name}>

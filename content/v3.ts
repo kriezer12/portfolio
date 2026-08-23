@@ -42,6 +42,17 @@ export interface LinkEntry {
   href: string;
 }
 
+export interface ManifestoSegment {
+  text: string;
+  hl?: boolean;
+}
+
+export interface Colophon {
+  label: string;
+  paragraphs: string[];
+  foot: string;
+}
+
 export const profile: Profile = {
   name: 'Kenneth Osorio',
   role: 'AI / Software Engineer — DevOps & Cloud.',
@@ -174,3 +185,24 @@ export const marqueeWords: string[] = [
   'CI/CD Automation',
   'Clean Execution',
 ];
+
+export const heroKickerSuffix = 'Est. folio, third edition';
+
+export const manifestoStatement: ManifestoSegment[] = [
+  { text: 'I build bridges between' },
+  { text: 'robust backends', hl: true },
+  { text: 'and' },
+  { text: 'intuitive frontends', hl: true },
+  { text: '— then automate everything in between.' },
+];
+
+export const colophon: Colophon = {
+  label: 'Colophon — About the author',
+  paragraphs: [
+    'Fullstack developer intern and IT student at PUP Manila, working with Next.js, React, Node.js, Python, and PostgreSQL. Focused on the DevOps space — CI/CD pipelines, cloud infrastructure, and clean execution.',
+    'He helped lead a team to engineer a full-stack NFC loyalty platform for the salon industry, accelerating feature rollouts while reducing support escalations. Currently deepening network fundamentals through CCNA study.',
+  ],
+  foot: 'Consistent President’s Lister, PUP',
+};
+
+export const bookingUrl = 'https://calendly.com/kennethosorio/consultation';

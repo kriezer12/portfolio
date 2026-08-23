@@ -2,11 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { links, profile } from '@/content/v3';
+import { bookingUrl, links, profile } from '@/content/v3';
 import { gsap } from '@/lib/gsap';
 import styles from './Contact.module.css';
-
-const BOOK_CALL_HREF = 'https://calendly.com/kennethosorio/consultation';
 
 interface ContactProps {
   header?: ReactNode;
@@ -128,7 +126,7 @@ export default function Contact({ header }: ContactProps) {
             </a>
             <a
               className={styles.btn}
-              href={BOOK_CALL_HREF}
+              href={bookingUrl}
               target="_blank"
               rel="noopener"
               data-magnetic
