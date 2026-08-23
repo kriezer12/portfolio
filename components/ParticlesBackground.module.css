@@ -1,9 +1,0 @@
-.canvas {
-  position: fixed;
-  inset: 0;
-  /* Below all content but above the opaque body background
-     (body has position:relative without z-index, so it creates
-     no stacking context that could trap this). */
-  z-index: -1;
-  pointer-events: none;
-}
