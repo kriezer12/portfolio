@@ -1,0 +1,51 @@
+/* ---------- custom cursor ---------- */
+.cursorDot,
+.cursorRing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  will-change: transform;
+  opacity: 0;
+}
+
+.cursorDot {
+  width: 6px;
+  height: 6px;
+  background: var(--vermilion, #ff4d00);
+}
+
+.cursorRing {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(20, 20, 19, 0.45);
+  transition:
+    width 0.3s var(--ease, cubic-bezier(0.76, 0, 0.24, 1)),
+    height 0.3s var(--ease, cubic-bezier(0.76, 0, 0.24, 1)),
+    border-color 0.3s,
+    background-color 0.3s;
+}
+
+.cursorRing.isActive {
+  width: 58px;
+  height: 58px;
+  border-color: transparent;
+  background: rgba(255, 77, 0, 0.12);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursorDot,
+  .cursorRing {
+    display: none !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :global(body.has-cursor),
+  :global(body.has-cursor a),
+  :global(body.has-cursor button) {
+    cursor: none;
+  }
+}
