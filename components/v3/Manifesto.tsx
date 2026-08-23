@@ -3,38 +3,17 @@
 import { Fragment, useEffect, useRef } from 'react';
 import { gsap } from '../../lib/gsap';
 import SectionHeader from './SectionHeader';
+import { colophon, manifestoStatement } from '@/content/v3';
 import styles from './Manifesto.module.css';
 
-interface Segment {
-  text: string;
-  hl?: boolean;
-}
-
-const STATEMENT: Segment[] = [
-  { text: 'I build bridges between' },
-  { text: 'robust backends', hl: true },
-  { text: 'and' },
-  { text: 'intuitive frontends', hl: true },
-  { text: '— then automate everything in between.' },
-];
-
-const COLOPHON_LABEL = 'Colophon — About the author';
-
-const COLOPHON_PARAGRAPHS: string[] = [
-  'Fullstack developer intern and IT student at PUP Manila, working with Next.js, React, Node.js, Python, and PostgreSQL. Focused on the DevOps space — CI/CD pipelines, cloud infrastructure, and clean execution.',
-  'He helped lead a team to engineer a full-stack NFC loyalty platform for the salon industry, accelerating feature rollouts while reducing support escalations. Currently deepening network fundamentals through CCNA study.',
-];
-
-const COLOPHON_FOOT = 'Consistent President’s Lister, PUP';
-
-const WORDS: { word: string; hl: boolean }[] = STATEMENT.flatMap((segment) =>
+const WORDS: { word: string; hl: boolean }[] = manifestoStatement.flatMap((segment) =>
   segment.text
     .split(/\s+/)
     .filter(Boolean)
     .map((word) => ({ word, hl: segment.hl ?? false })),
 );
 
-const FULL_TEXT = STATEMENT.map((segment) => segment.text).join(' ');
+const FULL_TEXT = manifestoStatement.map((segment) => segment.text).join(' ');
 
 export default function Manifesto() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -86,11 +65,11 @@ export default function Manifesto() {
           </span>
         </p>
         <aside className={styles.manifestoSide}>
-          <span className={styles.sideLabel}>{COLOPHON_LABEL}</span>
-          {COLOPHON_PARAGRAPHS.map((paragraph) => (
+          <span className={styles.sideLabel}>{colophon.label}</span>
+          {colophon.paragraphs.map((paragraph) => (
             <p key={paragraph.slice(0, 32)}>{paragraph}</p>
           ))}
-          <span className={styles.sideFoot}>{COLOPHON_FOOT}</span>
+          <span className={styles.sideFoot}>{colophon.foot}</span>
         </aside>
       </div>
     </section>
