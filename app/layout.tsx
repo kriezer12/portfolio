@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
-import ParticlesBackground from '@/components/ParticlesBackground';
-import PaletteMount from '@/components/palette/PaletteMount';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -13,10 +11,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://kennethosorio.dev'),
   title: {
-    default: 'Kenneth Osorio - Software Engineer',
+    default: 'Kenneth Osorio - AI / Software Engineer, DevOps & Cloud',
     template: '%s | Kenneth Osorio',
   },
-  description: 'Fullstack Developer & DevOps building scalable AI solutions and cloud infrastructure. Explore Kenneth Osorio\'s portfolio for projects in Next.js, AWS, and Automation.',
+  description:
+    'Kenneth P. Osorio — AI / Software Engineer based in Cavite, Philippines. Fullstack systems, DevOps automation, cloud infrastructure.',
   keywords: ['Kenneth Osorio', 'Software Engineer', 'Fullstack Developer', 'DevOps', 'AI', 'Cloud', 'Next.js', 'React', 'AWS', 'Philippines'],
   authors: [{ name: 'Kenneth Osorio' }],
   creator: 'Kenneth Osorio',
@@ -25,8 +24,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://kennethosorio.dev',
     siteName: 'Kenneth Osorio Portfolio',
-    title: 'Kenneth Osorio - Software Engineer',
-    description: 'Fullstack Developer & DevOps building scalable AI solutions and cloud infrastructure. Projects in Next.js, AWS, and Automation.',
+    title: 'Kenneth Osorio - AI / Software Engineer, DevOps & Cloud',
+    description:
+      'Kenneth P. Osorio — AI / Software Engineer based in Cavite, Philippines. Fullstack systems, DevOps automation, cloud infrastructure.',
     images: [
       {
         url: '/og-image.png',
@@ -38,10 +38,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kenneth Osorio - Software Engineer',
-    description: 'Fullstack Developer & DevOps building scalable AI solutions and cloud infrastructure.',
+    title: 'Kenneth Osorio - AI / Software Engineer, DevOps & Cloud',
+    description:
+      'Kenneth P. Osorio — AI / Software Engineer based in Cavite, Philippines. Fullstack systems, DevOps automation, cloud infrastructure.',
     images: ['/og-image.png'],
-    creator: '@thirsty_samurai', 
+    creator: '@thirsty_samurai',
   },
   icons: {
     icon: '/profile.jpg',
@@ -59,11 +60,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={jetbrainsMono.variable}>
-      <body className="antialiased min-h-screen flex flex-col">
-        <ParticlesBackground />
-        {children}
-        <PaletteMount />
-      </body>
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="antialiased min-h-screen flex flex-col">{children}</body>
     </html>
   );
 }
