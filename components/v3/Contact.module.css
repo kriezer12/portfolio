@@ -1,6 +1,6 @@
 .section {
   padding: clamp(80px, 10vw, 160px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--v3-rule);
   max-width: 1680px;
   margin: 0 auto;
 }
@@ -162,7 +162,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--v3-rule);
   padding-bottom: 8px;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -180,7 +180,7 @@
 
 .footer {
   margin-top: clamp(64px, 8vw, 120px);
-  border-top: 1px solid var(--rule-strong);
+  border-top: 1px solid var(--v3-rule-strong);
   padding-top: 20px;
   display: flex;
   flex-wrap: wrap;

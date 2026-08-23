@@ -1,6 +1,6 @@
 .section {
   padding: clamp(80px, 10vw, 160px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--v3-rule);
   max-width: 1680px;
   margin: 0 auto;
 }
@@ -13,7 +13,7 @@
 }
 
 .xpList {
-  border-top: 1px solid var(--rule-strong);
+  border-top: 1px solid var(--v3-rule-strong);
 }
 
 .xpRow {
@@ -22,7 +22,7 @@
   gap: 24px;
   align-items: baseline;
   padding: clamp(20px, 2.6vw, 32px) clamp(8px, 1vw, 20px);
-  border-bottom: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--v3-rule-strong);
   transition:
     background-color 0.3s,
     padding-left 0.3s var(--ease);

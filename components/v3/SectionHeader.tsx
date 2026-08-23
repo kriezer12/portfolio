@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { gsap } from '../../lib/gsap';
+import { gsap, useReducedMotion } from '../../lib/gsap';
 import styles from './SectionHeader.module.css';
 
 interface SectionHeaderProps {
@@ -12,11 +12,12 @@ interface SectionHeaderProps {
 
 export default function SectionHeader({ idx, title, note }: SectionHeaderProps) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (reduceMotion) return;
 
     const ctx = gsap.context(
       () => {
@@ -49,7 +50,7 @@ export default function SectionHeader({ idx, title, note }: SectionHeaderProps) 
     return () => {
       ctx.revert();
     };
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <div className={styles.secHead} ref={rootRef}>

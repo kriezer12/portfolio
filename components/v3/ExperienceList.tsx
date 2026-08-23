@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { experience } from '@/content/v3';
-import { gsap } from '@/lib/gsap';
+import { gsap, useReducedMotion } from '@/lib/gsap';
 import styles from './ExperienceList.module.css';
 
 interface ExperienceListProps {
@@ -12,10 +12,11 @@ interface ExperienceListProps {
 
 export default function ExperienceList({ header }: ExperienceListProps) {
   const rootRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const root = rootRef.current;
-    if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!root || reduceMotion) return;
 
     const ctx = gsap.context(() => {
       gsap.from(`.${styles.xpRow}`, {
@@ -29,7 +30,7 @@ export default function ExperienceList({ header }: ExperienceListProps) {
     }, root);
 
     return () => ctx.revert();
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <section id="experience" className={styles.section} ref={rootRef}>

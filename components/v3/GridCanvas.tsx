@@ -13,6 +13,7 @@
  * 90deg rotation and vermilion; springs back on exit.
  */
 import { useEffect, useRef } from 'react';
+import { FINE_POINTER_MEDIA, useReducedMotion } from '@/lib/gsap';
 import styles from './GridCanvas.module.css';
 
 const GRID = {
@@ -45,6 +46,7 @@ interface GridGeometry {
 
 export default function GridCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -52,8 +54,7 @@ export default function GridCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const finePointer = window.matchMedia(FINE_POINTER_MEDIA).matches;
 
     let width = 0;
     let height = 0;
@@ -239,7 +240,7 @@ export default function GridCanvas() {
       window.removeEventListener('blur', onPointerOut);
       probe.remove();
     };
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <div className={styles.root} aria-hidden="true">

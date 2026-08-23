@@ -1,6 +1,6 @@
 .section {
   padding: clamp(80px, 10vw, 160px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--v3-rule);
   max-width: 1680px;
   margin: 0 auto;
 }
@@ -20,6 +20,7 @@
   line-height: 1.08;
   letter-spacing: -0.02em;
   text-indent: -0.5ch;
+  color: #fff;
 }
 
 .word {
@@ -39,19 +40,19 @@
 
 .manifestoSide p {
   max-width: 34ch;
-  color: rgba(20, 20, 19, 0.72);
+  color: #fff;
   font-size: 14.5px;
 }
 
 .sideLabel {
-  color: rgba(20, 20, 19, 0.5);
-  border-bottom: 1px solid var(--rule-strong);
+  color: #fff;
+  border-bottom: 1px solid var(--v3-rule-strong);
   padding-bottom: 8px;
   font-family: var(--font-mono);
 }
 
 .sideFoot {
-  color: rgba(20, 20, 19, 0.45);
+  color: #fff;
   font-family: var(--font-mono);
 }
 

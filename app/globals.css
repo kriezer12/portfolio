@@ -20,6 +20,12 @@ body {
   scrollbar-color: var(--outline-variant) var(--background);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
   width: 8px;
@@ -84,12 +90,12 @@ body {
   --paper: #F2EFE9;
   --ink: #141413;
   --vermilion: #FF4D00;
-  --rule-strong: rgba(20, 20, 19, 0.28);
+  --v3-rule-strong: rgba(20, 20, 19, 0.28);
   --font-display: 'Clash Display', sans-serif;
   --font-body: 'Satoshi', sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
-  --rule: rgba(20, 20, 19, 0.12);
+  --v3-rule: rgba(20, 20, 19, 0.12);
   --gutter: clamp(20px, 4vw, 64px);
   min-width: 0;
   overflow-x: clip;

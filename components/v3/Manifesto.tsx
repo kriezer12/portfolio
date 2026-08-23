@@ -1,7 +1,7 @@
 'use client';
 
 import { Fragment, useEffect, useRef } from 'react';
-import { gsap } from '../../lib/gsap';
+import { gsap, useReducedMotion } from '../../lib/gsap';
 import SectionHeader from './SectionHeader';
 import { colophon, manifestoStatement } from '@/content/v3';
 import styles from './Manifesto.module.css';
@@ -17,11 +17,12 @@ const FULL_TEXT = manifestoStatement.map((segment) => segment.text).join(' ');
 
 export default function Manifesto() {
   const sectionRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (reduceMotion) return;
 
     const ctx = gsap.context(
       () => {
@@ -47,7 +48,7 @@ export default function Manifesto() {
     return () => {
       ctx.revert();
     };
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <section id="manifesto" className={styles.section} ref={sectionRef}>

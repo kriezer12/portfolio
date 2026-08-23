@@ -3,7 +3,8 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { bookingUrl, links, profile } from '@/content/v3';
-import { gsap } from '@/lib/gsap';
+import { FINE_POINTER_MEDIA, gsap, useReducedMotion } from '@/lib/gsap';
+import { useManilaClock } from '@/hooks/useManilaClock';
 import styles from './Contact.module.css';
 
 interface ContactProps {
@@ -14,11 +15,12 @@ export default function Contact({ header }: ContactProps) {
   const rootRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLHeadingElement>(null);
   const orbRef = useRef<HTMLSpanElement>(null);
-  const clockRef = useRef<HTMLSpanElement>(null);
+  const reduceMotion = useReducedMotion();
+  const time = useManilaClock();
 
   useEffect(() => {
     const root = rootRef.current;
-    if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!root || reduceMotion) return;
 
     const ctx = gsap.context(() => {
       if (ctaRef.current) {
@@ -48,7 +50,7 @@ export default function Contact({ header }: ContactProps) {
     }, root);
 
     const cleanups: Array<() => void> = [];
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    if (window.matchMedia(FINE_POINTER_MEDIA).matches) {
       const magnetics = Array.from(root.querySelectorAll<HTMLElement>('[data-magnetic]'));
       magnetics.forEach((el) => {
         const move = (e: MouseEvent) => {
@@ -76,28 +78,7 @@ export default function Contact({ header }: ContactProps) {
       cleanups.forEach((fn) => fn());
       ctx.revert();
     };
-  }, []);
-
-  useEffect(() => {
-    const el = clockRef.current;
-    if (!el) return;
-
-    const fmt = new Intl.DateTimeFormat('en-PH', {
-      timeZone: 'Asia/Manila',
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
-
-    const tick = () => {
-      el.textContent = fmt.format(new Date());
-    };
-
-    tick();
-    const timer = window.setInterval(tick, 1000);
-    return () => window.clearInterval(timer);
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <section id="contact" className={`${styles.section} ${styles.contact}`} ref={rootRef}>
@@ -153,7 +134,7 @@ export default function Contact({ header }: ContactProps) {
         <span>&copy; 2026 Kenneth P. Osorio</span>
         <span>Set in Clash Display &amp; Satoshi</span>
         <span>
-          Manila — <span ref={clockRef}>--:--:--</span> PHT
+          Manila — <span>{time}</span> PHT
         </span>
       </footer>
     </section>

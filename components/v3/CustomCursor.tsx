@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { FINE_POINTER_MEDIA, useReducedMotion } from '@/lib/gsap';
 import styles from './CustomCursor.module.css';
 
 const HOVER_SELECTOR = 'a, button, [data-hover]';
@@ -9,13 +10,13 @@ const RING_LERP = 0.16;
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const finePointer = window.matchMedia(FINE_POINTER_MEDIA);
     const dot = dotRef.current;
     const ring = ringRef.current;
-    if (!finePointer.matches || reducedMotion.matches || !dot || !ring) return;
+    if (!finePointer.matches || reduceMotion || !dot || !ring) return;
 
     document.body.classList.add('has-cursor');
 
@@ -71,7 +72,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseout', onOut);
       document.body.classList.remove('has-cursor');
     };
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <>

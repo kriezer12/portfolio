@@ -40,7 +40,6 @@ components/v3/
   GridCanvas.tsx             1:1 haoqi grid — fixed canvas, rails/rules/crosshairs,
                              cursor reactivity, reduced-motion static fallback
   CoordinateReadout.tsx      "0983 X 0246 Y" live mouse readout (bottom-center)
-  Preloader.tsx              counter 00→100 + double-curtain wipe, then hero intro
   CustomCursor.tsx           dot + trailing ring, hidden on coarse pointers
   TopBar.tsx                 brand, nav, MNL clock, "Open to work" status
   Marquee.tsx                seamless -50% loop track, pauses on hover

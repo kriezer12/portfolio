@@ -19,8 +19,8 @@ Light-only. V3 is a light theme; the v2 dark token block coexists untouched abov
 | `--paper` | `#F2EFE9` | Canvas |
 | `--ink` | `#141413` | Text, inverted fills |
 | `--vermilion` | `#FF4D00` | The single accent |
-| `--rule` | `rgba(20,20,19,0.12)` | Hairline rules, grid lines |
-| `--rule-strong` | `rgba(20,20,19,0.28)` | Emphasized rules, crosshairs |
+| `--v3-rule` | `rgba(20,20,19,0.12)` | Hairline rules, grid lines |
+| `--v3-rule-strong` | `rgba(20,20,19,0.28)` | Emphasized rules, crosshairs |
 | `--font-display` / `--font-body` | Clash Display / Satoshi (Fontshare) | Headings / body |
 | `--font-mono` | JetBrains Mono (`next/font`) | Labels, nav, readouts, tags |
 | `--ease` | `cubic-bezier(0.76, 0, 0.24, 1)` | Shared motion curve |
@@ -46,7 +46,7 @@ Hierarchy comes from size, weight, and mask reveals — never from color tricks 
 
 ## Components
 
-- **Fixed chrome:** `TopBar` (brand `K.O.³`, mono nav with left-origin underline sweep, live Manila clock, pulsing "Open to work" dot), `Marquee` (seamless −50% loop, pauses on hover), `CustomCursor` (dot + trailing ring that expands and tints vermilion over interactives).
+- **Fixed chrome:** `TopBar` (brand `K.O.` with superscript `V3`, mono nav with left-origin underline sweep, live Manila clock, pulsing "Open to work" dot), `Marquee` (seamless −50% loop, pauses on hover), `CustomCursor` (dot + trailing ring that expands and tints vermilion over interactives).
 - **Rows:** WorkList and ExperienceList rows are hairline-separated ledgers. Hover/focus = full ink invert with padding shift + arrow slide-in (work) or subtle tint + indent (experience). Invert doubles as the focus style.
 - **Contact:** giant two-line CTA with scrub parallax, pulsing vermilion orb, magnetic buttons with elastic return.
 - All copy lives in `content/v3.ts` — components stay presentational.
@@ -58,7 +58,7 @@ GSAP + ScrollTrigger via `lib/gsap.ts` (client-only registration, Lenis wired in
 - Entrances are masked rise/reveal, fire once (`once: true`). No preloader — the hero timeline plays on mount.
 - Scrubs: manifesto word opacity (0.14 → 1) between viewport 78% → 45%; hero name and CTA parallax out on scroll.
 - Every animated component scopes its animation in `gsap.context()` for cleanup.
-- React Bits vendored in `components/reactbits/`: SplitText (word masks), RotatingText (hero role line, off by default).
+- Mask reveals are hand-rolled GSAP (no vendored splitter). React Bits vendored in `components/reactbits/` — SplitText and RotatingText — but unused by default; RotatingText is available for the hero role line behind the `useRotatingRole` flag in `content/v3.ts`.
 
 ## Accessibility & fallbacks
 

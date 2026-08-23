@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { capabilities, studying } from '@/content/v3';
-import { gsap } from '@/lib/gsap';
+import { gsap, useReducedMotion } from '@/lib/gsap';
 import styles from './Capabilities.module.css';
 
 interface CapabilitiesProps {
@@ -12,10 +12,11 @@ interface CapabilitiesProps {
 
 export default function Capabilities({ header }: CapabilitiesProps) {
   const rootRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const root = rootRef.current;
-    if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!root || reduceMotion) return;
 
     const ctx = gsap.context(() => {
       gsap.from(`.${styles.capItems} li`, {
@@ -29,7 +30,7 @@ export default function Capabilities({ header }: CapabilitiesProps) {
     }, root);
 
     return () => ctx.revert();
-  }, []);
+  }, [reduceMotion]);
 
   const spanClasses = [styles.g1, styles.g2, styles.g3];
 

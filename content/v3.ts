@@ -1,6 +1,9 @@
 export interface Profile {
   name: string;
   role: string;
+  roleLead: string;
+  roleRest: string;
+  useRotatingRole: boolean;
   blurb: string;
   location: string;
   email: string;
@@ -56,6 +59,9 @@ export interface Colophon {
 export const profile: Profile = {
   name: 'Kenneth Osorio',
   role: 'AI / Software Engineer — DevOps & Cloud.',
+  roleLead: 'AI / Software Engineer',
+  roleRest: 'DevOps & Cloud.',
+  useRotatingRole: false,
   blurb:
     'Bridging robust backend systems with intuitive frontends, and automating whatever sits between them.',
   location: 'Cavite, Philippines',
@@ -186,8 +192,6 @@ export const marqueeWords: string[] = [
   'Clean Execution',
 ];
 
-export const heroKickerSuffix = 'Est. folio, third edition';
-
 export const manifestoStatement: ManifestoSegment[] = [
   { text: 'I build bridges between' },
   { text: 'robust backends', hl: true },
@@ -197,7 +201,7 @@ export const manifestoStatement: ManifestoSegment[] = [
 ];
 
 export const colophon: Colophon = {
-  label: 'Colophon — About the author',
+  label: 'About the author',
   paragraphs: [
     'Fullstack developer intern and IT student at PUP Manila, working with Next.js, React, Node.js, Python, and PostgreSQL. Focused on the DevOps space — CI/CD pipelines, cloud infrastructure, and clean execution.',
     'He helped lead a team to engineer a full-stack NFC loyalty platform for the salon industry, accelerating feature rollouts while reducing support escalations. Currently deepening network fundamentals through CCNA study.',

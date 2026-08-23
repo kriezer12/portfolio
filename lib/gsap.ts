@@ -3,12 +3,14 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
+export const FINE_POINTER_MEDIA = '(hover: hover) and (pointer: fine)';
+
 let lenisInstance: Lenis | null = null;
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const finePointer = window.matchMedia(FINE_POINTER_MEDIA);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   if (finePointer.matches && !reducedMotion.matches && !lenisInstance) {
@@ -25,10 +27,6 @@ if (typeof window !== 'undefined') {
     gsap.ticker.lagSmoothing(0);
     lenisInstance = lenis;
   }
-}
-
-export function getLenis(): Lenis | null {
-  return lenisInstance;
 }
 
 export function useReducedMotion(): boolean {

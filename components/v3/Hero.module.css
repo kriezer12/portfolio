@@ -99,7 +99,7 @@
   justify-content: space-between;
   margin-top: clamp(28px, 4vh, 56px);
   padding-top: 22px;
-  border-top: 1px solid var(--rule-strong);
+  border-top: 1px solid var(--v3-rule-strong);
   min-width: 0;
 }
 

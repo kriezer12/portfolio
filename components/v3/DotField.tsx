@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { FINE_POINTER_MEDIA, useReducedMotion } from '@/lib/gsap';
 
 interface DotFieldProps {
   className?: string;
@@ -15,14 +16,14 @@ interface Dot {
 
 export default function DotField({ className }: DotFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const canvasEl = canvasRef.current;
     if (!canvasEl) return;
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (reduced || !finePointer) return;
+    const finePointer = window.matchMedia(FINE_POINTER_MEDIA).matches;
+    if (reduceMotion || !finePointer) return;
 
     const maybeCtx = canvasEl.getContext('2d');
     if (!maybeCtx) return;
@@ -105,7 +106,7 @@ export default function DotField({ className }: DotFieldProps) {
       host.removeEventListener('mousemove', onMouseMove);
       host.removeEventListener('mouseleave', onMouseLeave);
     };
-  }, []);
+  }, [reduceMotion]);
 
   return <canvas ref={canvasRef} className={className} aria-hidden="true" />;
 }

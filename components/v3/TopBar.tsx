@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { profile } from '@/content/v3';
+import { useManilaClock } from '@/hooks/useManilaClock';
 import styles from './TopBar.module.css';
 
 const NAV_ITEMS = [
@@ -13,22 +13,7 @@ const NAV_ITEMS = [
 ];
 
 export default function TopBar() {
-  const [time, setTime] = useState('--:--:--');
-
-  useEffect(() => {
-    const fmt = new Intl.DateTimeFormat('en-PH', {
-      timeZone: 'Asia/Manila',
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
-
-    const tick = () => setTime(fmt.format(new Date()));
-    tick();
-    const intervalId = window.setInterval(tick, 1000);
-    return () => window.clearInterval(intervalId);
-  }, []);
+  const time = useManilaClock();
 
   return (
     <header className={styles.topbar}>

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { work } from '@/content/v3';
-import { gsap } from '@/lib/gsap';
+import { gsap, useReducedMotion } from '@/lib/gsap';
 import styles from './WorkList.module.css';
 
 interface WorkListProps {
@@ -12,10 +12,11 @@ interface WorkListProps {
 
 export default function WorkList({ header }: WorkListProps) {
   const rootRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const root = rootRef.current;
-    if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!root || reduceMotion) return;
 
     const ctx = gsap.context(() => {
       gsap.from(`.${styles.workRow}`, {
@@ -29,7 +30,7 @@ export default function WorkList({ header }: WorkListProps) {
     }, root);
 
     return () => ctx.revert();
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <section id="work" className={styles.section} ref={rootRef}>

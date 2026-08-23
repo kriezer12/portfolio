@@ -7,6 +7,7 @@
  * Decorative - aria-hidden.
  */
 import { useEffect, useRef } from 'react';
+import { useReducedMotion } from '@/lib/gsap';
 import styles from './CoordinateReadout.module.css';
 
 const formatCoord = (value: number) =>
@@ -14,11 +15,12 @@ const formatCoord = (value: number) =>
 
 export default function CoordinateReadout() {
   const textRef = useRef<HTMLSpanElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const el = textRef.current;
     if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (reduceMotion) return;
 
     let raf = 0;
     let pending = false;
@@ -45,7 +47,7 @@ export default function CoordinateReadout() {
       cancelAnimationFrame(raf);
       window.removeEventListener('mousemove', onMouseMove);
     };
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <div className={styles.readout} aria-hidden="true">

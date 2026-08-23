@@ -1,6 +1,6 @@
 .section {
   padding: clamp(80px, 10vw, 160px) var(--gutter);
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--v3-rule);
   max-width: 1680px;
   margin: 0 auto;
 }
@@ -21,7 +21,7 @@
 }
 
 .capGroup {
-  border-top: 1px solid var(--rule-strong);
+  border-top: 1px solid var(--v3-rule-strong);
   padding-top: 18px;
 }
 
@@ -54,7 +54,7 @@
   align-items: baseline;
   gap: 14px;
   padding: 9px 0;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--v3-rule);
   font-family: var(--font-display);
   font-weight: 600;
   font-size: clamp(17px, 1.6vw, 22px);
@@ -83,7 +83,7 @@
   flex-wrap: wrap;
   gap: 16px 48px;
   align-items: baseline;
-  border-top: 1px solid var(--rule-strong);
+  border-top: 1px solid var(--v3-rule-strong);
   padding-top: 22px;
 }
 
