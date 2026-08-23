@@ -1,0 +1,49 @@
+/* ---------- marquee ---------- */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid var(--rule-strong, rgba(20, 20, 19, 0.28));
+  border-bottom: 1px solid var(--rule-strong, rgba(20, 20, 19, 0.28));
+  padding: 14px 0;
+  user-select: none;
+}
+
+.track {
+  display: inline-flex;
+  will-change: transform;
+  animation: mq 28s linear infinite;
+}
+
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+.chunk {
+  font-family: var(--font-display, sans-serif);
+  font-weight: 600;
+  font-size: clamp(16px, 1.8vw, 22px);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  padding-right: 2.2em;
+}
+
+.chunk i {
+  font-style: normal;
+  color: var(--vermilion, #ff4d00);
+  padding-right: 2.2em;
+}
+
+@keyframes mq {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}
