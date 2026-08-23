@@ -75,7 +75,9 @@ body {
   --section-gap: 48px;
 
   --rule: 1px solid var(--outline-variant);
+}
 
+.v3-root {
   /* v3 "Gallery Editorial" — light token system added alongside v2; the v2 block above stays untouched */
   --paper: #F2EFE9;
   --ink: #141413;
@@ -85,9 +87,6 @@ body {
   --font-body: 'Satoshi', sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-:root {
   --rule: rgba(20, 20, 19, 0.12);
   --gutter: clamp(20px, 4vw, 64px);
 }
