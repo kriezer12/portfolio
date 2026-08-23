@@ -1,0 +1,11 @@
+/* v3 blueprint grid layer (spec SS3): one fixed canvas behind all content */
+.root {
+  display: contents;
+}
+
+.canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
