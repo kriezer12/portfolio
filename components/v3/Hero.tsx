@@ -16,7 +16,6 @@ export default function Hero() {
   const reduceMotion = useReducedMotion();
   const rootRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
-  const kickerInnerRef = useRef<HTMLSpanElement>(null);
   const line1Ref = useRef<HTMLSpanElement>(null);
   const line2Ref = useRef<HTMLSpanElement>(null);
   const roleInnerRef = useRef<HTMLSpanElement>(null);
@@ -33,14 +32,12 @@ export default function Hero() {
 
     const ctx = gsap.context(() => {
       gsap.set(canvas, { opacity: 0 });
-      gsap.set(kickerInnerRef.current, { yPercent: 110 });
       gsap.set(nameRows, { yPercent: 112 });
       gsap.set([roleInnerRef.current, blurbInnerRef.current], { yPercent: 110 });
 
       gsap
         .timeline({ delay: 0.15 })
         .to(canvas, { opacity: 1, duration: 1.4, ease: 'power2.out' }, 0.1)
-        .to(kickerInnerRef.current, { yPercent: 0, duration: 0.7, ease: 'power3.out' }, 0.15)
         .to(nameRows, { yPercent: 0, duration: 1.1, ease: 'power4.out', stagger: 0.12 }, 0.25)
         .to(roleInnerRef.current, { yPercent: 0, duration: 0.7, ease: 'power3.out' }, '-=0.7')
         .to(blurbInnerRef.current, { yPercent: 0, duration: 0.7, ease: 'power3.out' }, '-=0.55');
